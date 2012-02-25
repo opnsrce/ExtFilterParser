@@ -29,19 +29,19 @@ class ExtFilterParser
      * Stores the filters after they've been parsed with {@link parse}.
      * @var array
      */
-    private $parsedFilters = array();
+    protected $parsedFilters = array();
 
     /**
      * Stores the filters passed to {@link setFilters}.
      * @var string
      */
-    private $filters = '';
+    protected $filters = '';
 
     /**
      * The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for.
      * @var type
      */
-    private $requestParam = 'filter';
+    protected $requestParam = 'filter';
 
     /**
      *
@@ -98,11 +98,11 @@ class ExtFilterParser
 
     /**
      * Pulls filters from $_GET or $_POST
-     * @access private
+     * @access protected
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @return string
      */
-    private function pullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request)
+    protected function pullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request)
     {
         $filterJson = '';
         $filterFromGet = $request->query->get($this->requestParam);
@@ -164,12 +164,12 @@ class ExtFilterParser
 
     /**
      * Validates Decodes the passed in JSON into an instance of StdClass using json_decode
-     * @access private
+     * @access protected
      * @param string $filter_json The JSON to be decoded
      * @return StdClass
      * @throws \InvalidArgumentException If the passed in JSON is not valid
      */
-    private function decodeFilterJson($filter_json)
+    protected function decodeFilterJson($filter_json)
     {
         $decodedFilters = array();
         if (empty($filter_json) === FALSE) {
@@ -187,12 +187,12 @@ class ExtFilterParser
 
     /**
      * Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols
-     * @access private
+     * @access protected
      * @param string $comparison_operator The comparison operator being translated
      * @return string
      * @throws \UnexpectedValueException If the comparison operator is not one of the expected values
      */
-    private function translateComparisonOperator($comparison_operator)
+    protected function translateComparisonOperator($comparison_operator)
     {
         $operator = '';
         switch ($comparison_operator) {
@@ -214,11 +214,11 @@ class ExtFilterParser
 
     /**
      * Parses a comparison filter
-     * @access private
+     * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseComparisonFilter($filter)
+    protected function parseComparisonFilter($filter)
     {
         $comparisonOperator = $this->translateComparisonOperator($filter->comparison);
         if (!is_numeric($filter->value)) {
@@ -233,11 +233,11 @@ class ExtFilterParser
 
     /**
      * Parses a Date Filter
-     * @access private
+     * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseDateFilter($filter)
+    protected function parseDateFilter($filter)
     {
         $value = $filter->value;
         if ($value == '0000-00-00') {
@@ -254,11 +254,11 @@ class ExtFilterParser
 
     /**
      * Parses a String Filter
-     * @access private
+     * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseStringFilter($filter)
+    protected function parseStringFilter($filter)
     {
         return array(
             'expression' => "$filter->field LIKE",
@@ -268,11 +268,11 @@ class ExtFilterParser
 
     /**
      * Parses a List Filter
-     * @access private
+     * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseListFilter($filter)
+    protected function parseListFilter($filter)
     {
         if (!is_array($filter->value)) {
             $filter->value = explode(',', $filter->value);
