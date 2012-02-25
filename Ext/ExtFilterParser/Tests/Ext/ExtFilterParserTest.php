@@ -74,12 +74,9 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
     public function dateDataProvider()
     {
         return array(
-            array(
-                '2011-06-30',
-                'June 30, 2011',
-                '06/30/2011',
-                '30/06/2011'
-            )
+            array('2011-06-30', 'Y-m-d'),
+            array('June 30, 2011', 'F d, Y'),
+            array('06/30/2011', 'm/d/Y')
         );
     }
 
@@ -105,6 +102,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertClassHasAttribute('parsedFilters', $className);
         $this->assertClassHasAttribute('filters', $className);
         $this->assertClassHasAttribute('requestParam', $className);
+        $this->assertClassHasAttribute('dateFormat', $className);
     }
 
     public function testPropertyDefaultValues()
@@ -112,12 +110,14 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $extFilterParser = new ExtFilterParser();
         $this->assertAttributeEmpty('parsedFilters', $extFilterParser, 'ExtFilterParser::parsedFilters should default to an empty array');
         $this->assertAttributeEquals('filter', 'requestParam', $extFilterParser, 'ExtFilterParser::requestParam should default to \'filter\'');
+        $this->assertAttributeEquals('Y-m-d', 'dateFormat', $extFilterParser, 'ExtFilterParser::dateFormat should default to \'Y-m-d\'');
         $this->assertAttributeEquals('', 'filters', $extFilterParser, 'ExtFilterParser::filters should default to an empty string');
     }
 
     public function testPropertyDataTypes()
     {
         $this->assertAttributeInternalType('array', 'parsedFilters', $this->extFilterParser);
+        $this->assertAttributeInternalType('string', 'dateFormat', $this->extFilterParser);
         $this->assertAttributeInternalType('string', 'filters', $this->extFilterParser);
         $this->assertAttributeInternalType('string', 'requestParam', $this->extFilterParser);
     }
@@ -192,13 +192,17 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
      * @dataProvider dateDataProvider
      * @param string $date The date to be parsed
      */
-    public function testParseDateFilter($date)
+    public function testParseDateFilter($date, $dateFormat)
     {
+        $this->extFilterParser->setDateFormat($dateFormat);
+
         $filter = $this->generateFilterJson('date', 'dateField', $date, 'lt');
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
+        $formattedDate = date($dateFormat, strtotime($date));
+
         $this->assertCount(1, $parsedFilter);
         $this->assertEquals("dateField <", $parsedFilter[0]['expression']);
-        $this->assertEquals("'2011-06-30'", $parsedFilter[0]['value']);
+        $this->assertEquals("'$formattedDate'", $parsedFilter[0]['value']);
     }
 
     public function testParseDateFilterEmptyDate()

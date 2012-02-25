@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2011 Levi Hackwith <levi.hackwith@gmail.com>
  *
@@ -18,7 +19,7 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+ */
 
 namespace Ext\ExtFilterParser;
 
@@ -44,6 +45,12 @@ class ExtFilterParser
     protected $requestParam = 'filter';
 
     /**
+     * This is the format that the value of all date filters will be translated to
+     * @var string
+     */
+    protected $dateFormat = 'Y-m-d';
+
+    /**
      *
      * @return string
      */
@@ -67,9 +74,23 @@ class ExtFilterParser
      */
     public function getFilters()
     {
-        // @codeCoverageIgnoreStart
         return $this->filters;
-        // @codeCoverageIgnoreEnd
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return $this->dateFormat;
+    }
+
+    public function setDateFormat($dateFormat)
+    {
+        $this->dateFormat = $dateFormat;
+
+        return $this;
     }
 
     /**
@@ -109,7 +130,8 @@ class ExtFilterParser
         $filterFromPost = $request->request->get($this->requestParam);
         if (empty($filterFromGet) === FALSE) {
             $filterJson = $filterFromGet;
-        } elseif (empty($filterFromPost) === FALSE) {
+        }
+        elseif (empty($filterFromPost) === FALSE) {
             $filterJson = $filterFromPost;
         }
 
@@ -245,7 +267,7 @@ class ExtFilterParser
         }
         $timestamp = strtotime($value);
         if ($timestamp !== FALSE) {
-            $value = date("Y-m-d", $timestamp);
+            $value = date($this->dateFormat, $timestamp);
         }
         $filter->value = $value;
 
