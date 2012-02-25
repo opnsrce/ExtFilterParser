@@ -1,8 +1,29 @@
 <?php
+/**
+ * Copyright (c) 2011 Levi Hackwith <levi.hackwith@gmail.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 namespace Ext\ExtFilterParser;
 
-class ExtFilterParser {
+class ExtFilterParser
+{
 
     /**
      * Stores the filters after they've been parsed with {@link parse}.
@@ -26,7 +47,8 @@ class ExtFilterParser {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->filters;
     }
 
@@ -34,7 +56,8 @@ class ExtFilterParser {
      *
      * @return array
      */
-    public function getParsedFilters() {
+    public function getParsedFilters()
+    {
         return $this->parsedFilters;
     }
 
@@ -42,8 +65,11 @@ class ExtFilterParser {
      *
      * @return string
      */
-    public function getFilters() {
+    public function getFilters()
+    {
+        // @codeCoverageIgnoreStart
         return $this->filters;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -51,8 +77,10 @@ class ExtFilterParser {
      * @param string $filters
      * @return \TestApp\Services\Ext\ExtFilterParser
      */
-    public function setFilters($filters) {
+    public function setFilters($filters)
+    {
         $this->filters = $filters;
+
         return $this;
     }
 
@@ -61,8 +89,9 @@ class ExtFilterParser {
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @link api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
      */
-    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL) {
-        if($request) {
+    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL)
+    {
+        if ($request) {
             $this->filters = $this->pullFilterJsonFromRequest($request);
         }
     }
@@ -73,15 +102,17 @@ class ExtFilterParser {
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @return string
      */
-    private function pullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request) {
+    private function pullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request)
+    {
         $filterJson = '';
         $filterFromGet = $request->query->get($this->requestParam);
         $filterFromPost = $request->request->get($this->requestParam);
-        if(empty($filterFromGet) === FALSE) {
+        if (empty($filterFromGet) === FALSE) {
             $filterJson = $filterFromGet;
-        } elseif(empty($filterFromPost) === FALSE) {
+        } elseif (empty($filterFromPost) === FALSE) {
             $filterJson = $filterFromPost;
         }
+
         return $filterJson;
     }
 
@@ -90,10 +121,11 @@ class ExtFilterParser {
      * @return \TestApp\Services\Ext\ExtFilterParser
      * @throws \UnexpectedValueException If the filters being parsed are not valid
      */
-    public function parse() {
+    public function parse()
+    {
         $decodedFilters = $this->decodeFilterJson($this->filters);
-        foreach($decodedFilters as $filter) {
-            switch($filter->type) {
+        foreach ($decodedFilters as $filter) {
+            switch ($filter->type) {
                 case 'numeric':
                     $this->parsedFilters[] = $this->parseComparisonFilter($filter);
                     break;
@@ -110,54 +142,60 @@ class ExtFilterParser {
                     throw new \UnexpectedValueException(__METHOD__ . " Unknown filter type '$filter->type'");
             }
         }
+
         return $this;
     }
 
     /**
      * Parses the Ext Filters and then converts them into WHERE clauses for the passed in QueryBuilder object.
      * @link http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html
-     * @param \Doctrine\ORM\QueryBuilder $queryBuilder Instance of Doctrine's Query Builder Object
+     * @param \Doctrine\ORM\QueryBuilder $query_builder Instance of Doctrine's Query Builder Object
      * @return \Doctrine\ORM\QueryBuilder Returns QueryBuilder with WHERE clauses attached.
      */
-    public function parseIntoQueryBuilder(\Doctrine\ORM\QueryBuilder $queryBuilder) {
+    public function parseIntoQueryBuilder(\Doctrine\ORM\QueryBuilder $query_builder)
+    {
         $this->parse();
-        foreach($this->parsedFilters as $filter) {
-            $queryBuilder->andWhere('p.' . $filter['expression'] . ' ' . $filter['value']);
+        foreach ($this->parsedFilters as $filter) {
+            $query_builder->andWhere($filter['expression'] . ' ' . $filter['value']);
         }
-        return $queryBuilder;
+
+        return $query_builder;
     }
 
     /**
      * Validates Decodes the passed in JSON into an instance of StdClass using json_decode
      * @access private
-     * @param string $filterJson The JSON to be decoded
+     * @param string $filter_json The JSON to be decoded
      * @return StdClass
      * @throws \InvalidArgumentException If the passed in JSON is not valid
      */
-    private function decodeFilterJson($filterJson) {
+    private function decodeFilterJson($filter_json)
+    {
         $decodedFilters = array();
-        if(empty($filterJson) === FALSE) {
-            $decodedFilters = json_decode($filterJson);
-            if($decodedFilters === NULL) {
+        if (empty($filter_json) === FALSE) {
+            $decodedFilters = json_decode($filter_json);
+            if ($decodedFilters === NULL) {
                 throw new \InvalidArgumentException(__METHOD__ . " Expects first parameter to be a valid JSON string");
             }
-            if(!is_array($decodedFilters)) {
+            if (!is_array($decodedFilters)) {
                 $decodedFilters = array($decodedFilters);
             }
         }
+
         return $decodedFilters;
     }
 
     /**
      * Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols
      * @access private
-     * @param string $comparisonOperator The comparison operator being translated
+     * @param string $comparison_operator The comparison operator being translated
      * @return string
      * @throws \UnexpectedValueException If the comparison operator is not one of the expected values
      */
-    private function translateComparisonOperator($comparisonOperator) {
+    private function translateComparisonOperator($comparison_operator)
+    {
         $operator = '';
-        switch($comparisonOperator) {
+        switch ($comparison_operator) {
             case 'lt':
                 $operator = '<';
                 break;
@@ -168,8 +206,9 @@ class ExtFilterParser {
                 $operator = '=';
                 break;
             default:
-                throw new \UnexpectedValueException(__METHOD__ . " Invalid comparison operator '$comparisonOperator'");
+                throw new \UnexpectedValueException(__METHOD__ . " Invalid comparison operator '$comparison_operator'");
         }
+
         return $operator;
     }
 
@@ -179,11 +218,13 @@ class ExtFilterParser {
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseComparisonFilter($filter) {
+    private function parseComparisonFilter($filter)
+    {
         $comparisonOperator = $this->translateComparisonOperator($filter->comparison);
-        if(!is_numeric($filter->value)) {
+        if (!is_numeric($filter->value)) {
             $filter->value = "'$filter->value'";
         }
+
         return array(
             'expression' => "$filter->field $comparisonOperator",
             'value' => $filter->value
@@ -196,16 +237,18 @@ class ExtFilterParser {
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseDateFilter($filter) {
+    private function parseDateFilter($filter)
+    {
         $value = $filter->value;
-        if($value == '0000-00-00') {
+        if ($value == '0000-00-00') {
             $value = '';
         }
         $timestamp = strtotime($value);
-        if($timestamp !== FALSE) {
+        if ($timestamp !== FALSE) {
             $value = date("Y-m-d", $timestamp);
         }
         $filter->value = $value;
+
         return $this->parseComparisonFilter($filter);
     }
 
@@ -215,7 +258,8 @@ class ExtFilterParser {
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseStringFilter($filter) {
+    private function parseStringFilter($filter)
+    {
         return array(
             'expression' => "$filter->field LIKE",
             'value' => "'%$filter->value%'"
@@ -228,8 +272,9 @@ class ExtFilterParser {
      * @param stdClass $filter The filter being parsed
      * @return array
      */
-    private function parseListFilter($filter) {
-        if(!is_array($filter->value)) {
+    private function parseListFilter($filter)
+    {
+        if (!is_array($filter->value)) {
             $filter->value = explode(',', $filter->value);
         }
         return array(
@@ -239,3 +284,5 @@ class ExtFilterParser {
     }
 
 }
+
+?>
