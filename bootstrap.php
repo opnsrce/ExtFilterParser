@@ -26,7 +26,7 @@
  */
 function loadClass($className) {
     $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
-    $fullPath = DIRECTORY_SEPARATOR . $className . '.php';
+    $fullPath = __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
     @include_once($fullPath);
 }
 
