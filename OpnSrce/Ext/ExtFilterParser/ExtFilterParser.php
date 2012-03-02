@@ -110,8 +110,11 @@ class ExtFilterParser
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @link api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
      */
-    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL)
+    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL, $requestParam = "filter", $dateFormat = "Y-m-d")
     {
+        $this->requestParam = $requestParam;
+        $this->dateFormat = $dateFormat;
+
         if ($request) {
             $this->filters = $this->pullFilterJsonFromRequest($request);
         }

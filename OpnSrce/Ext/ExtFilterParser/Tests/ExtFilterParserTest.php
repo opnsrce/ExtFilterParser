@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2011 Levi Hackwith <levi.hackwith@gmail.com>
  *
@@ -18,19 +19,20 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+ */
 
 namespace OpnSrce\Ext\ExtFilterParser\Tests;
 
 use OpnSrce\Ext\ExtFilterParser\ExtFilterParser;
 
-class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
-{
+/**
+ * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser
+ */
+class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
 
     private $extFilterParser;
 
-    public function requestMockDataProvider()
-    {
+    public function requestMockDataProvider() {
         $testFilterJson = $this->generateFilterJson('string', 'stringField', 'A');
         $returnData = array();
 
@@ -59,8 +61,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         return $returnData;
     }
 
-    public function queryBuilderDataProvider()
-    {
+    public function queryBuilderDataProvider() {
         $queryBuilder = $this->getMock('\Doctrine\ORM\QueryBuilder', array('andWhere'));
         $queryBuilder
                 ->expects($this->any())
@@ -71,8 +72,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function dateDataProvider()
-    {
+    public function dateDataProvider() {
         return array(
             array('2011-06-30', 'Y-m-d'),
             array('June 30, 2011', 'F d, Y'),
@@ -80,8 +80,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function setUp()
-    {
+    public function setUp() {
         $this->extFilterParser = new ExtFilterParser();
     }
 
@@ -91,13 +90,14 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
      * @param mixed $value The value to filter by
      * @param string $comparison (Optional) Comparison Operator
      */
-    public function generateFilterJson($type, $field, $value, $comparison = '')
-    {
+    public function generateFilterJson($type, $field, $value, $comparison = '') {
         return json_encode(array('type' => $type, 'field' => $field, 'value' => $value, 'comparison' => $comparison));
     }
 
-    public function testForProperties()
-    {
+    /**
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
+     */
+    public function testForProperties() {
         $className = get_class($this->extFilterParser);
         $this->assertClassHasAttribute('parsedFilters', $className);
         $this->assertClassHasAttribute('filters', $className);
@@ -105,8 +105,11 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertClassHasAttribute('dateFormat', $className);
     }
 
-    public function testPropertyDefaultValues()
-    {
+    /*
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
+     */
+
+    public function testPropertyDefaultValues() {
         $extFilterParser = new ExtFilterParser();
         $this->assertAttributeEmpty('parsedFilters', $extFilterParser, 'ExtFilterParser::parsedFilters should default to an empty array');
         $this->assertAttributeEquals('filter', 'requestParam', $extFilterParser, 'ExtFilterParser::requestParam should default to \'filter\'');
@@ -114,8 +117,11 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals('', 'filters', $extFilterParser, 'ExtFilterParser::filters should default to an empty string');
     }
 
-    public function testPropertyDataTypes()
-    {
+    /*
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
+     */
+
+    public function testPropertyDataTypes() {
         $this->assertAttributeInternalType('array', 'parsedFilters', $this->extFilterParser);
         $this->assertAttributeInternalType('string', 'dateFormat', $this->extFilterParser);
         $this->assertAttributeInternalType('string', 'filters', $this->extFilterParser);
@@ -125,14 +131,17 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage ExtFilterParser::decodeFilterJson Expects first parameter to be a valid JSON string
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson
      */
-    public function testParseBadJsonException()
-    {
+    public function testParseBadJsonException() {
         $this->extFilterParser->setFilters('bad json')->parse();
     }
 
-    public function test__toString()
-    {
+    /*
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__toString
+     */
+
+    public function test__toString() {
         $filterJson = $this->generateFilterJson('string', 'firstName', 'Steve');
         $this->extFilterParser->setFilters($filterJson);
         $objectAsString = "$this->extFilterParser";
@@ -140,29 +149,39 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
+     */
+    public function testSetValuesFromConstructor() {
+        $extFilterParser = new ExtFilterParser(NULL, 'extFilter', 'm/d/y');
+        $this->assertAttributeEquals('extFilter', 'requestParam', $extFilterParser, 'ExtFilterParser::requestParam not getting set in constructor');
+        $this->assertAttributeEquals('m/d/y', 'dateFormat', $extFilterParser, 'ExtFilterParser::dateFormat not getting set in constructor');
+    }
+    /**
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage ExtFilterParser::translateComparisonOperator Invalid comparison operator 'bad'
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson
      */
-    public function testParseUnknownComparisonOperatorException()
-    {
+    public function testParseUnknownComparisonOperatorException() {
         $this->extFilterParser->setFilters('{"type":"numeric", "field": "foo", "value":"bar", "comparison": "bad"}')->parse();
     }
 
     /**
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage ExtFilterParser::parse Unknown filter type 'bad'
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson
      */
-    public function testParseUnknownFilterTypeException()
-    {
+    public function testParseUnknownFilterTypeException() {
         $this->extFilterParser->setFilters('{"type":"bad", "field": "foo", "value":"1"}')->parse();
     }
 
     /**
      * @dataProvider requestMockDataProvider
      * @param \Symfony\Component\HttpFoundation\Request Instance of the Symfony2 Request Object
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFilterJsonFromRequest
      */
-    public function testPullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request)
-    {
+    public function testPullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request) {
         $this->extFilterParser = new ExtFilterParser($request);
         $parsedFilter = $this->extFilterParser->parse()->getParsedFilters();
         $this->assertEquals("stringField LIKE", $parsedFilter[0]['expression']);
@@ -170,30 +189,31 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->testParseStringFilter();
     }
 
-    /*
+    /**
      * @expectedException UnexpectedValueException
-     * @expectedExceptionMessage ExtFilterParser::setFilters Unknown filter type 'badValue'
+     * @expectedExceptionMessage ExtFilterParser::parse Unknown filter type 'badValue'
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse
      */
-
-    public function testParseUnexpectedFilterTypeException()
-    {
-        $this->extFilterParser->setFilters('{"type":"badValue", "field": "foo", "value":"1"}');
+    public function testParseUnexpectedFilterTypeException() {
+        $this->extFilterParser->setFilters('{"type":"badValue", "field": "foo", "value":"1"}')->parse();
     }
 
-    public function testParseStringFilter()
-    {
+    /**
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson
+     */
+    public function testParseStringFilter() {
         $filter = $this->generateFilterJson('string', 'stringField', 'A');
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertEquals("stringField LIKE", $parsedFilter[0]['expression']);
         $this->assertEquals("'%A%'", $parsedFilter[0]['value']);
     }
 
+
     /**
      * @dataProvider dateDataProvider
      * @param string $date The date to be parsed
      */
-    public function testParseDateFilter($date, $dateFormat)
-    {
+    public function testParseDateFilter($date, $dateFormat) {
         $this->extFilterParser->setDateFormat($dateFormat);
 
         $filter = $this->generateFilterJson('date', 'dateField', $date, 'lt');
@@ -205,8 +225,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("'$formattedDate'", $parsedFilter[0]['value']);
     }
 
-    public function testParseDateFilterEmptyDate()
-    {
+    public function testParseDateFilterEmptyDate() {
         $filter = $this->generateFilterJson('date', 'dateField', '0000-00-00', 'gt');
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertCount(1, $parsedFilter);
@@ -214,8 +233,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("''", $parsedFilter[0]['value']);
     }
 
-    public function testParseNumericFilterLessThan()
-    {
+    public function testParseNumericFilterLessThan() {
         $filter = $this->generateFilterJson('numeric', 'numericField', 1, 'lt');
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertCount(1, $parsedFilter);
@@ -223,8 +241,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("1", $parsedFilter[0]['value']);
     }
 
-    public function testParseNumericFilterGreaterThan()
-    {
+    public function testParseNumericFilterGreaterThan() {
         $filter = $this->generateFilterJson('numeric', 'numericField', 1, 'gt');
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertCount(1, $parsedFilter);
@@ -232,8 +249,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("1", $parsedFilter[0]['value']);
     }
 
-    public function testParseNumericFilterEqualTo()
-    {
+    public function testParseNumericFilterEqualTo() {
         $filter = $this->generateFilterJson('numeric', 'numericField', 1, 'eq');
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertCount(1, $parsedFilter);
@@ -241,8 +257,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("1", $parsedFilter[0]['value']);
     }
 
-    public function testParseListFilterAsArray()
-    {
+    public function testParseListFilterAsArray() {
         $filter = $this->generateFilterJson('list', 'listField', array('a', 'b', 'c'));
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertCount(1, $parsedFilter);
@@ -250,8 +265,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("('a','b','c')", $parsedFilter[0]['value']);
     }
 
-    public function testParseListFilterAsCsv()
-    {
+    public function testParseListFilterAsCsv() {
         $filter = $this->generateFilterJson('list', 'listField', "a,b,c");
         $parsedFilter = $this->extFilterParser->setFilters($filter)->parse()->getParsedFilters();
         $this->assertCount(1, $parsedFilter);
@@ -259,14 +273,12 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("('a','b','c')", $parsedFilter[0]['value']);
     }
 
-    public function testSetFiltersReturnsInstance()
-    {
+    public function testSetFiltersReturnsInstance() {
         $instance = $this->extFilterParser->setFilters($this->generateFilterJson('list', 'listField', "a,b,c"));
         $this->assertInstanceOf(get_class($this->extFilterParser), $instance);
     }
 
-    public function testParseReturnsInstance()
-    {
+    public function testParseReturnsInstance() {
         $instance = $this->extFilterParser->setFilters($this->generateFilterJson('list', 'listField', "a,b,c"))->parse();
         $this->assertInstanceOf(get_class($this->extFilterParser), $instance);
     }
@@ -275,11 +287,9 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase
      * @dataProvider queryBuilderDataProvider
      * @param \Doctrine\ORM\QueryBuilder $query_builder
      */
-    public function testParseIntoQueryBuilder($query_builder)
-    {
+    public function testParseIntoQueryBuilder($query_builder) {
         $filter = $this->generateFilterJson('date', 'dateField', '2010-10-10', 'lt');
         $this->extFilterParser->setFilters($filter);
         $this->assertInstanceOf('\Doctrine\ORM\QueryBuilder', $this->extFilterParser->parseIntoQueryBuilder($query_builder));
     }
-
 }
