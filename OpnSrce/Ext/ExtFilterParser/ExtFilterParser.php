@@ -1,56 +1,39 @@
 <?php
 
-/**
- * Copyright (c) 2011 Levi Hackwith <levi.hackwith@gmail.com>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 namespace OpnSrce\Ext\ExtFilterParser;
 
+/**
+ * ExtFilter Parser is a class designed to quickly and easily parse data grid filters sent to the backend by an ExtJS 4 data grid.
+ *
+ * @author Levi Hackwith <levi.hackwith@gmail.com>
+ * @copyright 2012 Levi Hackwith
+ * @license http://opensource.org/licenses/mit-license.php MIT License
+ * @package Opnsrce\Ext
+ * @namespace \Opnsrce\Ext\ExtFilterParser
+ * @subpackage ExtFilterParser
+ */
 class ExtFilterParser
 {
 
-    /**
-     * Stores the filters after they've been parsed with {@link parse}.
-     * @var array
-     */
+    /** @var string the title to use in the header */
     protected $parsedFilters = array();
 
-    /**
-     * Stores the filters passed to {@link setFilters}.
-     * @var string
-     */
+    /** @var string Stores the filters passed to {@link setFilters}. */
     protected $filters = '';
 
-    /**
-     * The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for.
-     * @var type
-     */
+    /** @var string The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for. */
     protected $requestParam = 'filter';
 
-    /**
-     * This is the format that the value of all date filters will be translated to
-     * @var string
-     */
+    /** @var string This is the format that the value of all date filters will be translated to */
     protected $dateFormat = 'Y-m-d';
 
     /**
+     * Outputs the value of $this->filters when Opnsrce\Ext\ExtFilterParser\ExtFilterParser is converted to a string
+     *
+     * Example of Use:
+     *     $filterParser = new Opnsrce\Ext\ExtFilterParser\ExtFilterParser();
+     *     $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});
+     *     echo "Your filters are: $filterParser"; // Echos {"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"}
      *
      * @return string
      */
@@ -95,8 +78,9 @@ class ExtFilterParser
 
     /**
      *
+     * @access public
      * @param string $filters
-     * @return \TestApp\Services\Ext\ExtFilterParser
+     * @return OpnSrce\Ext\ExtFilterParser\ExtFilterParser
      */
     public function setFilters($filters)
     {
@@ -108,6 +92,7 @@ class ExtFilterParser
     /**
      * ExtFilterParser
      *
+     * @access public
      * @param string $requestParam (Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'.
      * @param string $dateFormat (Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'.
      */
@@ -124,8 +109,8 @@ class ExtFilterParser
 
     /**
      * Pulls filters from $_GET or $_POST
+     *
      * @access protected
-     * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @return string
      */
     protected function pullFiltersFromGetOrPost()
@@ -145,7 +130,9 @@ class ExtFilterParser
 
     /**
      * Parses the Ext Filters and stores the results in {@link $parsedFilters}.
-     * @return \TestApp\Services\Ext\ExtFilterParser
+     *
+     * @access public
+     * @return OpnSrce\Ext\ExtFilterParser\ExtFilterParser
      * @throws \UnexpectedValueException If the filters being parsed are not valid
      */
     public function parse()
@@ -175,7 +162,10 @@ class ExtFilterParser
 
     /**
      * Parses the Ext Filters and then converts them into WHERE clauses for the passed SQL Query.
+     *
+     * @access public
      * @param string $query The SQL query to attach the WHERE clause to
+     * @return string
      */
     public function parseIntoQuery($query)
     {
@@ -197,6 +187,7 @@ class ExtFilterParser
 
     /**
      * Validates Decodes the passed in JSON into an instance of StdClass using json_decode
+     *
      * @access protected
      * @param string $filter_json The JSON to be decoded
      * @return StdClass
@@ -220,6 +211,7 @@ class ExtFilterParser
 
     /**
      * Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols
+     *
      * @access protected
      * @param string $comparison_operator The comparison operator being translated
      * @return string
@@ -247,6 +239,7 @@ class ExtFilterParser
 
     /**
      * Parses a comparison filter
+     *
      * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
@@ -266,6 +259,7 @@ class ExtFilterParser
 
     /**
      * Parses a Date Filter
+     *
      * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
@@ -287,6 +281,7 @@ class ExtFilterParser
 
     /**
      * Parses a String Filter
+     *
      * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array
@@ -301,6 +296,7 @@ class ExtFilterParser
 
     /**
      * Parses a List Filter
+     *
      * @access protected
      * @param stdClass $filter The filter being parsed
      * @return array

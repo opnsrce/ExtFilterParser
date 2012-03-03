@@ -27,8 +27,10 @@ class ExtFilterParserSymfony extends \OpnSrce\Ext\ExtFilterParser\ExtFilterParse
 
     /**
      * ExtFilterParser
-     * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
-     * @link api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
+     *
+     * @access public
+     * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's Request object.
+     * @link http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
      */
     public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL, $requestParam = "filter", $dateFormat = "Y-m-d") {
         $this->requestParam = $requestParam;
@@ -39,6 +41,13 @@ class ExtFilterParserSymfony extends \OpnSrce\Ext\ExtFilterParser\ExtFilterParse
         }
     }
 
+    /**
+     * Pulls filters from $_GET or $_POST
+     *
+     * @access protected
+     * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
+     * @return string
+     */
     protected function pullFiltersFromGetOrPost($request) {
         $filterJson = '';
         $filterFromGet = $request->query->get($this->requestParam);
