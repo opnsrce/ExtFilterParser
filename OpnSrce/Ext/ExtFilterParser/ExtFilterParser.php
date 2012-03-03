@@ -142,7 +142,7 @@ class ExtFilterParser
     }
 
     /**
-     * Parses the Ext Filters and stores the results in {@link $parsedFiltes}.
+     * Parses the Ext Filters and stores the results in {@link $parsedFilters}.
      * @return \TestApp\Services\Ext\ExtFilterParser
      * @throws \UnexpectedValueException If the filters being parsed are not valid
      */
