@@ -247,6 +247,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals("dateField >", $parsedFilter[0]['expression']);
         $this->assertEquals("''", $parsedFilter[0]['value']);
     }
+
     /**
      *
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter
@@ -325,6 +326,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
      *
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters
      */
+
     public function testSetFiltersReturnsInstance() {
         $instance = $this->extFilterParser->setFilters($this->generateFilterJson('list', 'listField', "a,b,c"));
         $this->assertInstanceOf(get_class($this->extFilterParser), $instance);
@@ -340,7 +342,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * 
+     *
      * @dataProvider queryBuilderDataProvider
      * @param \Doctrine\ORM\QueryBuilder $query_builder
      */
@@ -348,6 +350,25 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
         $filter = $this->generateFilterJson('date', 'dateField', '2010-10-10', 'lt');
         $this->extFilterParser->setFilters($filter);
         $this->assertInstanceOf('\Doctrine\ORM\QueryBuilder', $this->extFilterParser->parseIntoQueryBuilder($query_builder));
+    }
+
+    /**
+     *
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getFilters
+     */
+    public function testGetFilters() {
+        $filter = $this->generateFilterJson('date', 'dateField', '2010-10-10', 'lt');
+        $this->extFilterParser->setFilters($filter);
+        $this->assertEquals($filter, $this->extFilterParser->getFilters());
+    }
+
+    /**
+     *
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getDateFormat
+     */
+    public function testGetDateFormat() {
+        $extFilterParser = new ExtFilterParser(null, 'filter', 'm/d/y');
+        $this->assertEquals('m/d/y', $extFilterParser->getDateFormat());
     }
 
 }
