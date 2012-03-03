@@ -105,7 +105,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
         $this->assertClassHasAttribute('dateFormat', $className);
     }
 
-    /*
+    /**
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
      */
 
@@ -117,7 +117,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
         $this->assertAttributeEquals('', 'filters', $extFilterParser, 'ExtFilterParser::filters should default to an empty string');
     }
 
-    /*
+    /**
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
      */
 
@@ -137,7 +137,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
         $this->extFilterParser->setFilters('bad json')->parse();
     }
 
-    /*
+    /**
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__toString
      */
 
@@ -156,6 +156,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
         $this->assertAttributeEquals('extFilter', 'requestParam', $extFilterParser, 'ExtFilterParser::requestParam not getting set in constructor');
         $this->assertAttributeEquals('m/d/y', 'dateFormat', $extFilterParser, 'ExtFilterParser::dateFormat not getting set in constructor');
     }
+    
     /**
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage ExtFilterParser::translateComparisonOperator Invalid comparison operator 'bad'
