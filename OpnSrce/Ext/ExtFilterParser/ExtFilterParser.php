@@ -107,16 +107,18 @@ class ExtFilterParser
 
     /**
      * ExtFilterParser
-     * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
-     * @link api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
+     *
+     * @param string $requestParam (Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'.
+     * @param string $dateFormat (Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'.
      */
-    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL, $requestParam = "filter", $dateFormat = "Y-m-d")
+    public function __construct($requestParam = "filter", $dateFormat = "Y-m-d")
     {
         $this->requestParam = $requestParam;
         $this->dateFormat = $dateFormat;
-
-        if ($request) {
-            $this->filters = $this->pullFilterJsonFromRequest($request);
+        $filters = $this->pullFiltersFromGetOrPost();
+        if(empty($filters) === FALSE) {
+            $this->filters = $filters;
+            $this->parse();
         }
     }
 
@@ -126,11 +128,11 @@ class ExtFilterParser
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @return string
      */
-    protected function pullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request)
+    protected function pullFiltersFromGetOrPost()
     {
         $filterJson = '';
-        $filterFromGet = $request->query->get($this->requestParam);
-        $filterFromPost = $request->request->get($this->requestParam);
+        $filterFromGet = isset($_GET[$this->requestParam]) === TRUE ? $_GET[$this->requestParam] : '';
+        $filterFromPost = isset($_POST[$this->requestParam]) === TRUE ? $_POST[$this->requestParam] : '';
         if (empty($filterFromGet) === FALSE) {
             $filterJson = $filterFromGet;
         }
@@ -172,19 +174,25 @@ class ExtFilterParser
     }
 
     /**
-     * Parses the Ext Filters and then converts them into WHERE clauses for the passed in QueryBuilder object.
-     * @link http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html
-     * @param \Doctrine\ORM\QueryBuilder $query_builder Instance of Doctrine's Query Builder Object
-     * @return \Doctrine\ORM\QueryBuilder Returns QueryBuilder with WHERE clauses attached.
+     * Parses the Ext Filters and then converts them into WHERE clauses for the passed SQL Query.
+     * @param string $query The SQL query to attach the WHERE clause to
      */
-    public function parseIntoQueryBuilder(\Doctrine\ORM\QueryBuilder $query_builder)
+    public function parseIntoQuery($query)
     {
         $this->parse();
-        foreach ($this->parsedFilters as $filter) {
-            $query_builder->andWhere($filter['expression'] . ' ' . $filter['value']);
-        }
+        $whereClause = 'WHERE 1=1';
+        $clauses = array();
 
-        return $query_builder;
+        foreach ($this->parsedFilters as $filter) {
+           $clauses[] = $filter['expression'] . ' ' . $filter['value'];
+        }
+        if(empty($clauses) === FALSE) {
+            $whereClause = 'WHERE ' . implode(' AND ', $clauses);
+        }
+        $query .= " $whereClause";
+
+        return $query;
+
     }
 
     /**

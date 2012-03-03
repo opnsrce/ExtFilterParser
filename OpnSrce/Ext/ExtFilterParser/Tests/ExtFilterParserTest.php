@@ -149,7 +149,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct
      */
     public function testSetValuesFromConstructor() {
-        $extFilterParser = new ExtFilterParser(NULL, 'extFilter', 'm/d/y');
+        $extFilterParser = new ExtFilterParser('extFilter', 'm/d/y');
         $this->assertAttributeEquals('extFilter', 'requestParam', $extFilterParser, 'ExtFilterParser::requestParam not getting set in constructor');
         $this->assertAttributeEquals('m/d/y', 'dateFormat', $extFilterParser, 'ExtFilterParser::dateFormat not getting set in constructor');
     }
@@ -175,20 +175,33 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
-     * @dataProvider requestMockDataProvider
-     * @param \Symfony\Component\HttpFoundation\Request Instance of the Symfony2 Request Object
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse
-     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFilterJsonFromRequest
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost
      */
-    public function testPullFilterJsonFromRequest(\Symfony\Component\HttpFoundation\Request $request) {
-        $this->extFilterParser = new ExtFilterParser($request);
+    public function testPullFiltersFromGet() {
+        $_GET['filter'] = $this->generateFilterJson('string', 'stringField', 'A');
+        $this->extFilterParser = new ExtFilterParser();
         $parsedFilter = $this->extFilterParser->parse()->getParsedFilters();
         $this->assertEquals("stringField LIKE", $parsedFilter[0]['expression']);
         $this->assertEquals("'%A%'", $parsedFilter[0]['value']);
         $this->testParseStringFilter();
     }
 
+    /**
+     *
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost
+     */
+    public function testPullFiltersFromPost() {
+        $_POST['filter'] = $this->generateFilterJson('string', 'stringField', 'A');
+        $this->extFilterParser = new ExtFilterParser();
+        $parsedFilter = $this->extFilterParser->parse()->getParsedFilters();
+        $this->assertEquals("stringField LIKE", $parsedFilter[0]['expression']);
+        $this->assertEquals("'%A%'", $parsedFilter[0]['value']);
+        $this->testParseStringFilter();
+    }
     /**
      *
      * @expectedException UnexpectedValueException
@@ -343,13 +356,14 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
-     * @dataProvider queryBuilderDataProvider
-     * @param \Doctrine\ORM\QueryBuilder $query_builder
+     * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::parseIntoQuery
      */
-    public function testParseIntoQueryBuilder($query_builder) {
+    public function testParseIntoQuery() {
         $filter = $this->generateFilterJson('date', 'dateField', '2010-10-10', 'lt');
+        $expectedResult = "SELECT * FROM myTable WHERE dateField < '2010-10-10'";
+
         $this->extFilterParser->setFilters($filter);
-        $this->assertInstanceOf('\Doctrine\ORM\QueryBuilder', $this->extFilterParser->parseIntoQueryBuilder($query_builder));
+        $this->assertEquals($expectedResult, $this->extFilterParser->parseIntoQuery('SELECT * FROM myTable'));
     }
 
     /**
@@ -367,7 +381,7 @@ class ExtFilterParserTest extends \PHPUnit_Framework_TestCase {
      * @covers OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getDateFormat
      */
     public function testGetDateFormat() {
-        $extFilterParser = new ExtFilterParser(null, 'filter', 'm/d/y');
+        $extFilterParser = new ExtFilterParser('filter', 'm/d/y');
         $this->assertEquals('m/d/y', $extFilterParser->getDateFormat());
     }
 
