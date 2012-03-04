@@ -128,26 +128,44 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
                  <span class="highlight">$dateFormat</span>= ''Y-m-d''
                 </code><div class="description">
-<p class="short-description"></p>This is the format that the value of all date filters will be translated to</div>
+<p class="short-description">This is the format that the value of all date filters will be parsed to.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>'Y-m-d'</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parseDateFilter">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter</a>
+         
+    </dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters" class="anchor"></a><div class="property protected">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\OpnSrce\Ext\ExtFilterParser\type
                  <span class="highlight">$filters</span>= ''''
                 </code><div class="description">
-<p class="short-description"></p>Stores the filters passed to {@link setFilters}.</div>
+<p class="short-description">The filters to be parsed.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>string</dd>
+<dd>\OpnSrce\Ext\ExtFilterParser\type</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::setFilters()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters()</a>
+         
+    </dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -156,12 +174,21 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
                  <span class="highlight">$parsedFilters</span>= 'array()'
                 </code><div class="description">
-<p class="short-description"></p>the title to use in the header</div>
+<p class="short-description">The parsed filters.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parse()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()</a>
+         
+    </dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -170,12 +197,21 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
                  <span class="highlight">$requestParam</span>= ''filter''
                 </code><div class="description">
-<p class="short-description"></p>The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for.</div>
+<p class="short-description">The $_GET or $_POST key that the filters will be stored in when passed from the frontend.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>'filter'</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::pullFiltersFromGetOrPost()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost()</a>
+         
+    </dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -193,9 +229,13 @@
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description">ExtFilterParser</p></div>
+          void</code><div class="description"><p class="short_description">The class constructor.</p></div>
 <div class="code-tabs">
-<div class="long-description"></div>
+<div class="long-description"><p>Example Use:</p>
+
+<pre><code> $extFilterParserWithDefaults = new ExtFilterParser();
+ $extFilterParse = new ExtFilterParser('my_ext_filters', '/m/d/Y');
+</code></pre></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -230,7 +270,7 @@
           )
         </span>
         :
-          string</code><div class="description"><p class="short_description">Outputs the value of $this->filters when Opnsrce\Ext\ExtFilterParser\ExtFilterParser is converted to a string</p></div>
+          string</code><div class="description"><p class="short_description">Outputs the value of $this->filters when an instance of the class is converted to a string.</p></div>
 <div class="code-tabs">
 <div class="long-description"><p>Example of Use:
     $filterParser = new Opnsrce\Ext\ExtFilterParser\ExtFilterParser();
@@ -246,6 +286,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://www.php.net/manual/en/language.oop5.magic.php#object.tostring">PHP manual entry on __toString()</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -255,7 +306,7 @@
           )
         </span>
         :
-          \OpnSrce\Ext\ExtFilterParser\StdClass</code><div class="description"><p class="short_description">Validates Decodes the passed in JSON into an instance of StdClass using json_decode</p></div>
+          \OpnSrce\Ext\ExtFilterParser\StdClass</code><div class="description"><p class="short_description">Validates Decodes the passed in JSON into an instance of StdClass using json_decode.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -305,7 +356,7 @@
           )
         </span>
         :
-          string</code><div class="description"><p class="short_description"></p></div>
+          string</code><div class="description"><p class="short_description">Gets the format that date filters will be parsed into.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Returns</strong><table class="argument-info">
@@ -318,6 +369,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24dateFormat">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -327,7 +389,7 @@
           )
         </span>
         :
-          string</code><div class="description"><p class="short_description"></p></div>
+          string</code><div class="description"><p class="short_description">Gets filters in their unparsed state.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Returns</strong><table class="argument-info">
@@ -340,6 +402,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24filters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -349,7 +422,7 @@
           )
         </span>
         :
-          array</code><div class="description"><p class="short_description"></p></div>
+          array</code><div class="description"><p class="short_description">Gets the filters in their parsed state</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Returns</strong><table class="argument-info">
@@ -362,6 +435,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24parsedFilters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$parsedFilters</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -371,7 +455,7 @@
           )
         </span>
         :
-          <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description"><p class="short_description">Parses the Ext Filters and stores the results in {@link $parsedFilters}.</p></div>
+          <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description"><p class="short_description">Parses the Ext Filters</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Returns</strong><table class="argument-info">
@@ -409,7 +493,7 @@
           )
         </span>
         :
-          array</code><div class="description"><p class="short_description">Parses a comparison filter</p></div>
+          array</code><div class="description"><p class="short_description">Parses a comparison filter.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -449,7 +533,7 @@
           )
         </span>
         :
-          array</code><div class="description"><p class="short_description">Parses a Date Filter</p></div>
+          array</code><div class="description"><p class="short_description">Parses a Date Filter.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -529,7 +613,7 @@
           )
         </span>
         :
-          array</code><div class="description"><p class="short_description">Parses a List Filter</p></div>
+          array</code><div class="description"><p class="short_description">Parses a List Filter.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -569,7 +653,7 @@
           )
         </span>
         :
-          array</code><div class="description"><p class="short_description">Parses a String Filter</p></div>
+          array</code><div class="description"><p class="short_description">Parses a String Filter.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -611,7 +695,8 @@
         :
           string</code><div class="description"><p class="short_description">Pulls filters from $_GET or $_POST</p></div>
 <div class="code-tabs">
-<div class="long-description"></div>
+<div class="long-description"><p>This method is called automatically from the class constructor. If a parameter inside of $_GET or $_POST matches the requestParam value, the filters
+are automatically stored and parsed.</p></div>
 <strong>Returns</strong><table class="argument-info">
 <thead><tr>
 <th>Type</th>
@@ -627,18 +712,34 @@
 <dd>protected
          
     </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24filters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24requestParam">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$requestParam</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parse()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()</a>
+         
+    </dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setDateFormat()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setDateFormat</span><span class="nb-faded-text">(
-           $dateFormat
+          string $dateFormat
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
+          <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description"><p class="short_description">Sets the format that date filters will be parsed into.</p></div>
 <div class="code-tabs">
+<div class="long-description"><p>$dateFormat must be formatted to meet one of the formats supported by PHP.</p></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -647,10 +748,36 @@
 </tr></thead>
 <tr>
 <th>$dateFormat</th>
-<td></td>
+<td>string</td>
 <td><em></em></td>
 </tr>
 </table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://us2.php.net/manual/en/function.date.php">List of supported date formats</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24dateFormat">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -660,9 +787,10 @@
           )
         </span>
         :
-          <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description"><p class="short_description"></p></div>
+          <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description"><p class="short_description">Sets the filters taht will be parsed.</p></div>
 <div class="code-tabs">
-<div class="long-description"></div>
+<div class="long-description"><p>Example Use:
+     $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});</p></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -700,7 +828,7 @@
           )
         </span>
         :
-          string</code><div class="description"><p class="short_description">Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols</p></div>
+          string</code><div class="description"><p class="short_description">Translates Ext's custom comparison types into the standard '>', '<', and '=' symbols.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">

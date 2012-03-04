@@ -1,39 +1,30 @@
 <?php
 
-/**
- * Copyright (c) 2011 Levi Hackwith <levi.hackwith@gmail.com>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 namespace OpnSrce\Ext\ExtFilterParser;
 
+/**
+ * An Extension of the ExtFilterParser class designed to work with Symfony2.
+ *
+ * @package Opnsrce\Ext
+ * @subpackage ExtFilterParser
+ * @namespace \Opnsrce\Ext\ExtFilterParser
+ * @author Levi Hackwith <levi.hackwith@gmail.com>
+ * @copyright 2012 Levi Hackwith
+ * @license http://opensource.org/licenses/mit-license.php MIT License
+ */
 class ExtFilterParserSymfony extends \OpnSrce\Ext\ExtFilterParser\ExtFilterParser {
 
     /**
-     * ExtFilterParser
+     * Class constructor
      *
      * @access public
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's Request object.
-     * @link http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
+     * @param string $requestParam (Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'.
+     * @param string $dateFormat (Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'.
+     * @link http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html Documentation for Symfony's Request object
      */
-    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL, $requestParam = "filter", $dateFormat = "Y-m-d") {
-        $this->requestParam = $requestParam;
+    public function __construct(\Symfony\Component\HttpFoundation\Request $request = NULL, $request_param = "filter", $dateFormat = "Y-m-d") {
+        $this->requestParam = $request_param;
         $this->dateFormat = $dateFormat;
 
         if($request) {
@@ -42,11 +33,12 @@ class ExtFilterParserSymfony extends \OpnSrce\Ext\ExtFilterParser\ExtFilterParse
     }
 
     /**
-     * Pulls filters from $_GET or $_POST
+     * Pulls filters from $_GET or $_POST via Symfony's request object
      *
      * @access protected
      * @param \Symfony\Component\HttpFoundation\Request $request Instance of Symfony2's request object.
      * @return string
+     * @link http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html Documentation for Symfony's Request object
      */
     protected function pullFiltersFromGetOrPost($request) {
         $filterJson = '';
@@ -63,17 +55,19 @@ class ExtFilterParserSymfony extends \OpnSrce\Ext\ExtFilterParser\ExtFilterParse
 
     /**
      * Parses the Ext Filters and then converts them into WHERE clauses for the passed in QueryBuilder object.
+     *
+     * @access public
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder Instance of Doctrine's Query Builder Object
      * @link http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html
-     * @param \Doctrine\ORM\QueryBuilder $query_builder Instance of Doctrine's Query Builder Object
      * @return \Doctrine\ORM\QueryBuilder Returns QueryBuilder with WHERE clauses attached.
      */
-    public function parseIntoQuery(\Doctrine\ORM\QueryBuilder $query_builder) {
+    public function parseIntoQuery(\Doctrine\ORM\QueryBuilder $queryBuilder) {
         $this->parse();
         foreach($this->parsedFilters as $filter) {
             $query_builder->andWhere($filter['expression'] . ' ' . $filter['value']);
         }
 
-        return $query_builder;
+        return $queryBuilder;
     }
 
 }

@@ -98,7 +98,7 @@
 <a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
 <div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
-<small class="package"><b>Package: </b></small><p class="short-description">ExtFilter Parser is a class designed to quickly and easily parse data grid filters sent to the backend by an ExtJS 4 data grid.</p>
+<small class="package"><b>Package: </b>Opnsrce\Ext\ExtFilterParser</small><p class="short-description">An Extension of the ExtFilterParser class designed to work with Symfony2.</p>
 <div class="long-description"></div>
 <dl class="class-info">
 <dt>Parent(s)</dt>
@@ -112,6 +112,15 @@
 <dd>2012 Levi Hackwith
          
     </dd>
+<dt>License</dt>
+<dd>
+<a href="http://opensource.org/licenses/mit-license.php">MIT License</a>
+         
+    </dd>
+<dt>Namespace</dt>
+<dd>\Opnsrce\Ext\ExtFilterParser
+         
+    </dd>
 </dl>
 <h3>Properties</h3>
 <div>
@@ -119,7 +128,7 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
                  <span class="highlight">$dateFormat</span>= ''Y-m-d''
                 </code><div class="description">
-<span class="attribute">inherited</span><p class="short-description"></p>This is the format that the value of all date filters will be translated to<small>Inherited from:
+<span class="attribute">inherited</span><p class="short-description">This is the format that the value of all date filters will be parsed to.</p><small>Inherited from:
                         <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24dateFormat">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$dateFormat</a></small>
 </div>
 <div class="code-tabs">
@@ -127,9 +136,18 @@
 <strong>Default value</strong><code>'Y-m-d'</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
 <dt>Inherited_from</dt>
 <dd>
 <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24dateFormat">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$dateFormat</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parseDateFilter">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter</a>
          
     </dd>
 </dl>
@@ -137,20 +155,29 @@
 <div class="clear"></div>
 </div>
 <a id="\OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::$filters" class="anchor"></a><div class="property protected inherited_from ">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\OpnSrce\Ext\ExtFilterParser\type
                  <span class="highlight">$filters</span>= ''''
                 </code><div class="description">
-<span class="attribute">inherited</span><p class="short-description"></p>Stores the filters passed to {@link setFilters}.<small>Inherited from:
+<span class="attribute">inherited</span><p class="short-description">The filters to be parsed.</p><small>Inherited from:
                         <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24filters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$filters</a></small>
 </div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>string</dd>
+<dd>\OpnSrce\Ext\ExtFilterParser\type</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
 <dt>Inherited_from</dt>
 <dd>
 <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24filters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$filters</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::setFilters()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters()</a>
          
     </dd>
 </dl>
@@ -161,7 +188,7 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
                  <span class="highlight">$parsedFilters</span>= 'array()'
                 </code><div class="description">
-<span class="attribute">inherited</span><p class="short-description"></p>the title to use in the header<small>Inherited from:
+<span class="attribute">inherited</span><p class="short-description">The parsed filters.</p><small>Inherited from:
                         <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24parsedFilters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$parsedFilters</a></small>
 </div>
 <div class="code-tabs">
@@ -169,9 +196,18 @@
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
 <dt>Inherited_from</dt>
 <dd>
 <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24parsedFilters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$parsedFilters</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parse()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()</a>
          
     </dd>
 </dl>
@@ -182,7 +218,7 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
                  <span class="highlight">$requestParam</span>= ''filter''
                 </code><div class="description">
-<span class="attribute">inherited</span><p class="short-description"></p>The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for.<small>Inherited from:
+<span class="attribute">inherited</span><p class="short-description">The $_GET or $_POST key that the filters will be stored in when passed from the frontend.</p><small>Inherited from:
                         <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24requestParam">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$requestParam</a></small>
 </div>
 <div class="code-tabs">
@@ -190,9 +226,18 @@
 <strong>Default value</strong><code>'filter'</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
 <dt>Inherited_from</dt>
 <dd>
 <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24%24requestParam">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$$requestParam</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::pullFiltersFromGetOrPost()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost()</a>
          
     </dd>
 </dl>
@@ -206,17 +251,21 @@
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
           \Symfony\Component\HttpFoundation\Request $request
               =
-              NULL,  $requestParam
+              NULL,  $request_param
               =
-              "filter",  $dateFormat
+              "filter", string $dateFormat
               =
               "Y-m-d"
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description">ExtFilterParser</p></div>
+          void</code><div class="description"><p class="short_description">Class constructor</p></div>
 <div class="code-tabs">
-<div class="long-description"></div>
+<div class="long-description"><p>Example Use:</p>
+
+<pre><code> $extFilterParserWithDefaults = new ExtFilterParser();
+ $extFilterParse = new ExtFilterParser('my_ext_filters', '/m/d/Y');
+</code></pre></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -230,14 +279,15 @@
 </em></td>
 </tr>
 <tr>
-<th>$requestParam</th>
+<th>$request_param</th>
 <td></td>
 <td><em></em></td>
 </tr>
 <tr>
 <th>$dateFormat</th>
-<td></td>
-<td><em></em></td>
+<td>string</td>
+<td><em><p>(Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'.</p>
+</em></td>
 </tr>
 </table>
 <strong>Details</strong><dl class="function-info">
@@ -247,7 +297,7 @@
     </dd>
 <dt>Link</dt>
 <dd>
-<a href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html">http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html</a>
+<a href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html">Documentation for Symfony's Request object</a>
          
     </dd>
 </dl>
@@ -261,7 +311,7 @@
         </span>
         :
           string</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Outputs the value of $this->filters when Opnsrce\Ext\ExtFilterParser\ExtFilterParser is converted to a string</p>
+<span class="attribute">inherited</span><p class="short_description">Outputs the value of $this->filters when an instance of the class is converted to a string.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::__toString()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__toString()</a></small>
 </div>
@@ -280,6 +330,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://www.php.net/manual/en/language.oop5.magic.php#object.tostring">PHP manual entry on __toString()</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -290,7 +351,7 @@
         </span>
         :
           \OpnSrce\Ext\ExtFilterParser\StdClass</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Validates Decodes the passed in JSON into an instance of StdClass using json_decode</p>
+<span class="attribute">inherited</span><p class="short_description">Validates Decodes the passed in JSON into an instance of StdClass using json_decode.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::decodeFilterJson()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson()</a></small>
 </div>
@@ -344,7 +405,7 @@
         </span>
         :
           string</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
+<span class="attribute">inherited</span><p class="short_description">Gets the format that date filters will be parsed into.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::getDateFormat()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getDateFormat()</a></small>
 </div>
@@ -360,6 +421,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24dateFormat">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -370,7 +442,7 @@
         </span>
         :
           string</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
+<span class="attribute">inherited</span><p class="short_description">Gets filters in their unparsed state.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::getFilters()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getFilters()</a></small>
 </div>
@@ -386,6 +458,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24filters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -396,7 +479,7 @@
         </span>
         :
           array</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
+<span class="attribute">inherited</span><p class="short_description">Gets the filters in their parsed state</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::getParsedFilters()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters()</a></small>
 </div>
@@ -412,6 +495,17 @@
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24parsedFilters">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$parsedFilters</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -422,7 +516,7 @@
         </span>
         :
           <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Parses the Ext Filters and stores the results in {@link $parsedFilters}.</p>
+<span class="attribute">inherited</span><p class="short_description">Parses the Ext Filters</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parse()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()</a></small>
 </div>
@@ -464,7 +558,7 @@
         </span>
         :
           array</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Parses a comparison filter</p>
+<span class="attribute">inherited</span><p class="short_description">Parses a comparison filter.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parseComparisonFilter()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter()</a></small>
 </div>
@@ -508,7 +602,7 @@
         </span>
         :
           array</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Parses a Date Filter</p>
+<span class="attribute">inherited</span><p class="short_description">Parses a Date Filter.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parseDateFilter()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter()</a></small>
 </div>
@@ -547,7 +641,7 @@
 </div>
 <a id="\OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::parseIntoQuery()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">parseIntoQuery</span><span class="nb-faded-text">(
-          \Doctrine\ORM\QueryBuilder $query_builder
+          \Doctrine\ORM\QueryBuilder $queryBuilder
           )
         </span>
         :
@@ -561,7 +655,7 @@
 <th>Description</th>
 </tr></thead>
 <tr>
-<th>$query_builder</th>
+<th>$queryBuilder</th>
 <td>\Doctrine\ORM\QueryBuilder</td>
 <td><em><p>Instance of Doctrine's Query Builder Object</p>
 </em></td>
@@ -578,6 +672,10 @@
 </tr>
 </table>
 <strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
 <dt>Link</dt>
 <dd>
 <a href="http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html">http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html</a>
@@ -594,7 +692,7 @@
         </span>
         :
           array</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Parses a List Filter</p>
+<span class="attribute">inherited</span><p class="short_description">Parses a List Filter.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parseListFilter()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseListFilter()</a></small>
 </div>
@@ -638,7 +736,7 @@
         </span>
         :
           array</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Parses a String Filter</p>
+<span class="attribute">inherited</span><p class="short_description">Parses a String Filter.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::parseStringFilter()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseStringFilter()</a></small>
 </div>
@@ -681,9 +779,10 @@
           )
         </span>
         :
-          string</code><div class="description"><p class="short_description">Pulls filters from $_GET or $_POST</p></div>
+          string</code><div class="description"><p class="short_description">Pulls filters from $_GET or $_POST via Symfony's request object</p></div>
 <div class="code-tabs">
-<div class="long-description"></div>
+<div class="long-description"><p>This method is called automatically from the class constructor. If a parameter inside of $_GET or $_POST matches the requestParam value, the filters
+are automatically stored and parsed.</p></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -712,22 +811,28 @@
 <dd>protected
          
     </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html">Documentation for Symfony's Request object</a>
+         
+    </dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::setDateFormat()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setDateFormat</span><span class="nb-faded-text">(
-           $dateFormat
+          string $dateFormat
           )
         </span>
         :
-          void</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
+          <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets the format that date filters will be parsed into.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::setDateFormat()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setDateFormat()</a></small>
 </div>
 <div class="code-tabs">
+<div class="long-description"><p>$dateFormat must be formatted to meet one of the formats supported by PHP.</p></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -736,10 +841,36 @@
 </tr></thead>
 <tr>
 <th>$dateFormat</th>
-<td></td>
+<td>string</td>
 <td><em></em></td>
 </tr>
 </table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://us2.php.net/manual/en/function.date.php">List of supported date formats</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::%24dateFormat">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat</a>
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -750,12 +881,13 @@
         </span>
         :
           <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</a></code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
+<span class="attribute">inherited</span><p class="short_description">Sets the filters taht will be parsed.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::setFilters()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters()</a></small>
 </div>
 <div class="code-tabs">
-<div class="long-description"></div>
+<div class="long-description"><p>Example Use:
+     $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});</p></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -794,7 +926,7 @@
         </span>
         :
           string</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols</p>
+<span class="attribute">inherited</span><p class="short_description">Translates Ext's custom comparison types into the standard '>', '<', and '=' symbols.</p>
 <small>Inherited from:
                     <a href="db_ExtFilterParser.html#%5COpnSrce%5CExt%5CExtFilterParser%5CExtFilterParser::translateComparisonOperator()">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::translateComparisonOperator()</a></small>
 </div>

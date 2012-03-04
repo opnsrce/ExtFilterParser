@@ -5,36 +5,62 @@ namespace OpnSrce\Ext\ExtFilterParser;
 /**
  * ExtFilter Parser is a class designed to quickly and easily parse data grid filters sent to the backend by an ExtJS 4 data grid.
  *
+ * @package Opnsrce\Ext
+ * @subpackage ExtFilterParser
+ * @namespace \Opnsrce\Ext\ExtFilterParser
  * @author Levi Hackwith <levi.hackwith@gmail.com>
  * @copyright 2012 Levi Hackwith
  * @license http://opensource.org/licenses/mit-license.php MIT License
- * @package Opnsrce\Ext
- * @namespace \Opnsrce\Ext\ExtFilterParser
- * @subpackage ExtFilterParser
  */
 class ExtFilterParser
 {
 
-    /** @var string the title to use in the header */
+    /**
+     * The parsed filters.
+     *
+     * @var string
+     * @access protected
+     * @see ExtFilterParser::parse()
+     */
     protected $parsedFilters = array();
 
-    /** @var string Stores the filters passed to {@link setFilters}. */
+    /**
+     * The filters to be parsed.
+     *
+     * @var type
+     * @access protected
+     * @see ExtFilterParser::setFilters()
+     */
     protected $filters = '';
 
-    /** @var string The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for. */
+    /**
+     * The $_GET or $_POST key that the filters will be stored in when passed from the frontend.
+     *
+     * @var string
+     * @access protected
+     * @see ExtFilterParser::pullFiltersFromGetOrPost()
+     */
     protected $requestParam = 'filter';
 
-    /** @var string This is the format that the value of all date filters will be translated to */
+    /**
+     * This is the format that the value of all date filters will be parsed to.
+     *
+     * @var string
+     * @access protected
+     * @see ExtFilterParser::parseDateFilter
+     */
     protected $dateFormat = 'Y-m-d';
 
     /**
-     * Outputs the value of $this->filters when Opnsrce\Ext\ExtFilterParser\ExtFilterParser is converted to a string
+     * Outputs the value of $this->filters when an instance of the class is converted to a string.
      *
      * Example of Use:
      *     $filterParser = new Opnsrce\Ext\ExtFilterParser\ExtFilterParser();
      *     $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});
      *     echo "Your filters are: $filterParser"; // Echos {"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"}
      *
+     * @access public
+     * @link http://www.php.net/manual/en/language.oop5.magic.php#object.tostring PHP manual entry on __toString()
      * @return string
      */
     public function __toString()
@@ -43,7 +69,10 @@ class ExtFilterParser
     }
 
     /**
+     * Gets the filters in their parsed state
      *
+     * @access public
+     * @see ExtFilterParser::$parsedFilters
      * @return array
      */
     public function getParsedFilters()
@@ -52,7 +81,10 @@ class ExtFilterParser
     }
 
     /**
+     * Gets filters in their unparsed state.
      *
+     * @access public
+     * @see ExtFilterParser::$filters
      * @return string
      */
     public function getFilters()
@@ -61,22 +93,10 @@ class ExtFilterParser
     }
 
     /**
+     * Sets the filters taht will be parsed.
      *
-     * @return string
-     */
-    public function getDateFormat()
-    {
-        return $this->dateFormat;
-    }
-
-    public function setDateFormat($dateFormat)
-    {
-        $this->dateFormat = $dateFormat;
-
-        return $this;
-    }
-
-    /**
+     * Example Use:
+     *      $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});
      *
      * @access public
      * @param string $filters
@@ -88,9 +108,43 @@ class ExtFilterParser
 
         return $this;
     }
+    /**
+     * Gets the format that date filters will be parsed into.
+     *
+     * @access public
+     * @see ExtFilterParser::$dateFormat
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return $this->dateFormat;
+    }
 
     /**
-     * ExtFilterParser
+     * Sets the format that date filters will be parsed into.
+     *
+     * $dateFormat must be formatted to meet one of the formats supported by PHP.
+     *
+     * @link http://us2.php.net/manual/en/function.date.php List of supported date formats
+     * @access public
+     * @param string $dateFormat
+     * @see ExtFilterParser::$dateFormat
+     * @return \OpnSrce\Ext\ExtFilterParser\ExtFilterParser
+     */
+    public function setDateFormat($dateFormat)
+    {
+        $this->dateFormat = $dateFormat;
+
+        return $this;
+    }
+
+    /**
+     * The class constructor.
+     *
+     * Example Use:
+     *
+     *      $extFilterParserWithDefaults = new ExtFilterParser();
+     *      $extFilterParse = new ExtFilterParser('my_ext_filters', '/m/d/Y');
      *
      * @access public
      * @param string $requestParam (Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'.
@@ -110,7 +164,13 @@ class ExtFilterParser
     /**
      * Pulls filters from $_GET or $_POST
      *
+     * This method is called automatically from the class constructor. If a parameter inside of $_GET or $_POST matches the requestParam value, the filters
+     * are automatically stored and parsed.
+     *
      * @access protected
+     * @see ExtFilterParser::$filters
+     * @see ExtFilterParser::$requestParam
+     * @see ExtFilterParser::parse()
      * @return string
      */
     protected function pullFiltersFromGetOrPost()
@@ -129,7 +189,7 @@ class ExtFilterParser
     }
 
     /**
-     * Parses the Ext Filters and stores the results in {@link $parsedFilters}.
+     * Parses the Ext Filters
      *
      * @access public
      * @return OpnSrce\Ext\ExtFilterParser\ExtFilterParser
@@ -186,7 +246,7 @@ class ExtFilterParser
     }
 
     /**
-     * Validates Decodes the passed in JSON into an instance of StdClass using json_decode
+     * Validates Decodes the passed in JSON into an instance of StdClass using json_decode.
      *
      * @access protected
      * @param string $filter_json The JSON to be decoded
@@ -210,7 +270,7 @@ class ExtFilterParser
     }
 
     /**
-     * Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols
+     * Translates Ext's custom comparison types into the standard '>', '<', and '=' symbols.
      *
      * @access protected
      * @param string $comparison_operator The comparison operator being translated
@@ -238,7 +298,7 @@ class ExtFilterParser
     }
 
     /**
-     * Parses a comparison filter
+     * Parses a comparison filter.
      *
      * @access protected
      * @param stdClass $filter The filter being parsed
@@ -258,7 +318,7 @@ class ExtFilterParser
     }
 
     /**
-     * Parses a Date Filter
+     * Parses a Date Filter.
      *
      * @access protected
      * @param stdClass $filter The filter being parsed
@@ -280,7 +340,7 @@ class ExtFilterParser
     }
 
     /**
-     * Parses a String Filter
+     * Parses a String Filter.
      *
      * @access protected
      * @param stdClass $filter The filter being parsed
@@ -295,7 +355,7 @@ class ExtFilterParser
     }
 
     /**
-     * Parses a List Filter
+     * Parses a List Filter.
      *
      * @access protected
      * @param stdClass $filter The filter being parsed

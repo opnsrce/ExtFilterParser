@@ -12,17 +12,8 @@
       <tag line="2" name="link" description="http://docblox-project.org" link="http://docblox-project.org"/>
     </docblock>
   </file>
-  <file path="\ExtFilterParser.php" hash="fe698b18d125c8fa878d3ce42f1b307d">
+  <file path="\ExtFilterParser.php" hash="16b140e18517e53945a705409d4dbf98">
     <parse_markers>
-      <critical line="18" code="50019">No short description for property $parsedFilters</critical>
-      <critical line="21" code="50019">No short description for property $filters</critical>
-      <critical line="24" code="50019">No short description for property $requestParam</critical>
-      <critical line="27" code="50019">No short description for property $dateFormat</critical>
-      <error line="45" code="50012">No short description for method getParsedFilters()</error>
-      <error line="54" code="50012">No short description for method getFilters()</error>
-      <error line="63" code="50012">No short description for method getDateFormat()</error>
-      <error line="72" code="50010">No DocBlock was found for method setDateFormat()</error>
-      <error line="79" code="50012">No short description for method setFilters()</error>
       <error line="1" code="50007">No page-level DocBlock was found in file \ExtFilterParser.php</error>
     </parse_markers>
     <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser" line="15" package="Opnsrce\Ext\ExtFilterParser">
@@ -32,326 +23,364 @@
       <docblock line="5">
         <description><![CDATA[ExtFilter Parser is a class designed to quickly and easily parse data grid filters sent to the backend by an ExtJS 4 data grid.]]></description>
         <long-description><![CDATA[]]></long-description>
+        <tag line="5" name="package" description="Opnsrce\Ext"/>
+        <tag line="5" name="subpackage" description="ExtFilterParser"/>
+        <tag line="5" name="namespace" description="\Opnsrce\Ext\ExtFilterParser"/>
         <tag line="5" name="author" description="Levi Hackwith &lt;levi.hackwith@gmail.com&gt;"/>
         <tag line="5" name="copyright" description="2012 Levi Hackwith"/>
         <tag line="5" name="license" description="http://opensource.org/licenses/mit-license.php MIT License"/>
-        <tag line="5" name="package" description="Opnsrce\Ext"/>
-        <tag line="5" name="namespace" description="\Opnsrce\Ext\ExtFilterParser"/>
-        <tag line="5" name="subpackage" description="ExtFilterParser"/>
       </docblock>
-      <property final="false" static="false" visibility="protected" line="19" package="Default">
+      <property final="false" static="false" visibility="protected" line="25" package="Default">
         <name>$parsedFilters</name>
         <default><![CDATA[array()]]></default>
         <docblock line="18">
-          <description><![CDATA[]]></description>
+          <description><![CDATA[The parsed filters.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="18" name="var" description="the title to use in the header" type="string">
+          <tag line="18" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="18" name="access" description="protected"/>
+          <tag line="18" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()"/>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="22" package="Default">
+      <property final="false" static="false" visibility="protected" line="34" package="Default">
         <name>$filters</name>
         <default><![CDATA['']]></default>
-        <docblock line="21">
-          <description><![CDATA[]]></description>
+        <docblock line="27">
+          <description><![CDATA[The filters to be parsed.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="21" name="var" description="Stores the filters passed to {@link setFilters}." type="string">
-            <type by_reference="false">string</type>
+          <tag line="27" name="var" description="" type="\OpnSrce\Ext\ExtFilterParser\type">
+            <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\type</type>
           </tag>
+          <tag line="27" name="access" description="protected"/>
+          <tag line="27" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters()" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters()"/>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="25" package="Default">
+      <property final="false" static="false" visibility="protected" line="43" package="Default">
         <name>$requestParam</name>
         <default><![CDATA['filter']]></default>
-        <docblock line="24">
-          <description><![CDATA[]]></description>
+        <docblock line="36">
+          <description><![CDATA[The $_GET or $_POST key that the filters will be stored in when passed from the frontend.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="24" name="var" description="The name of the $_GET or $_POST parameter that {@link pullFilterJsonFromRequest} looks for." type="string">
+          <tag line="36" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="36" name="access" description="protected"/>
+          <tag line="36" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost()" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost()"/>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="28" package="Default">
+      <property final="false" static="false" visibility="protected" line="52" package="Default">
         <name>$dateFormat</name>
         <default><![CDATA['Y-m-d']]></default>
-        <docblock line="27">
-          <description><![CDATA[]]></description>
+        <docblock line="45">
+          <description><![CDATA[This is the format that the value of all date filters will be parsed to.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="27" name="var" description="This is the format that the value of all date filters will be translated to" type="string">
+          <tag line="45" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="45" name="access" description="protected"/>
+          <tag line="45" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter"/>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="40" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="66" package="Default">
         <name>__toString</name>
         <type>function</type>
-        <docblock line="30">
-          <description><![CDATA[Outputs the value of $this->filters when Opnsrce\Ext\ExtFilterParser\ExtFilterParser is converted to a string]]></description>
+        <docblock line="54">
+          <description><![CDATA[Outputs the value of $this->filters when an instance of the class is converted to a string.]]></description>
           <long-description><![CDATA[<p>Example of Use:
     $filterParser = new Opnsrce\Ext\ExtFilterParser\ExtFilterParser();
     $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});
     echo "Your filters are: $filterParser"; // Echos {"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"}</p>]]></long-description>
-          <tag line="30" name="return" description="" type="string">
-            <type by_reference="false">string</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="49" package="Default">
-        <name>getParsedFilters</name>
-        <type>function</type>
-        <docblock line="45">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="45" name="return" description="" type="array">
-            <type by_reference="false">array</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="58" package="Default">
-        <name>getFilters</name>
-        <type>function</type>
-        <docblock line="54">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
+          <tag line="54" name="access" description="public"/>
+          <tag line="54" name="link" description="PHP manual entry on __toString()" link="http://www.php.net/manual/en/language.oop5.magic.php#object.tostring"/>
           <tag line="54" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="67" package="Default">
-        <name>getDateFormat</name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="78" package="Default">
+        <name>getParsedFilters</name>
         <type>function</type>
-        <docblock line="63">
-          <description><![CDATA[]]></description>
+        <docblock line="71">
+          <description><![CDATA[Gets the filters in their parsed state]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="63" name="return" description="" type="string">
+          <tag line="71" name="access" description="public"/>
+          <tag line="71" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$parsedFilters" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$parsedFilters"/>
+          <tag line="71" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="90" package="Default">
+        <name>getFilters</name>
+        <type>function</type>
+        <docblock line="83">
+          <description><![CDATA[Gets filters in their unparsed state.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="83" name="access" description="public"/>
+          <tag line="83" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters"/>
+          <tag line="83" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="72">
-        <name>setDateFormat</name>
-        <type>function</type>
-        <argument line="72">
-          <name>$dateFormat</name>
-          <default><![CDATA[]]></default>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="85" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="105" package="Default">
         <name>setFilters</name>
         <type>function</type>
-        <docblock line="79">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="79" name="access" description="public"/>
-          <tag line="79" name="param" description="" type="string" variable="$filters">
+        <docblock line="95">
+          <description><![CDATA[Sets the filters taht will be parsed.]]></description>
+          <long-description><![CDATA[<p>Example Use:
+     $filterParser->setFilteres({"type":"date", "value":"2012-01-01", "field":"dateField", "comparison": "lt"});</p>]]></long-description>
+          <tag line="95" name="access" description="public"/>
+          <tag line="95" name="param" description="" type="string" variable="$filters">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="79" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser">
+          <tag line="95" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</type>
           </tag>
         </docblock>
-        <argument line="85">
+        <argument line="105">
           <name>$filters</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="99" package="Default">
-        <name>__construct</name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="118" package="Default">
+        <name>getDateFormat</name>
         <type>function</type>
-        <docblock line="92">
-          <description><![CDATA[ExtFilterParser]]></description>
+        <docblock line="111">
+          <description><![CDATA[Gets the format that date filters will be parsed into.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="92" name="access" description="public"/>
-          <tag line="92" name="param" description="(Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'." type="string" variable="$requestParam">
-            <type by_reference="false">string</type>
-          </tag>
-          <tag line="92" name="param" description="(Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'." type="string" variable="$dateFormat">
+          <tag line="111" name="access" description="public"/>
+          <tag line="111" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat"/>
+          <tag line="111" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="99">
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="134" package="Default">
+        <name>setDateFormat</name>
+        <type>function</type>
+        <docblock line="123">
+          <description><![CDATA[Sets the format that date filters will be parsed into.]]></description>
+          <long-description><![CDATA[<p>$dateFormat must be formatted to meet one of the formats supported by PHP.</p>]]></long-description>
+          <tag line="123" name="link" description="List of supported date formats" link="http://us2.php.net/manual/en/function.date.php"/>
+          <tag line="123" name="access" description="public"/>
+          <tag line="123" name="param" description="" type="string" variable="$dateFormat">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="123" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$dateFormat"/>
+          <tag line="123" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser">
+            <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</type>
+          </tag>
+        </docblock>
+        <argument line="134">
+          <name>$dateFormat</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="153" package="Default">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="141">
+          <description><![CDATA[The class constructor.]]></description>
+          <long-description><![CDATA[<p>Example Use:</p>
+
+<pre><code> $extFilterParserWithDefaults = new ExtFilterParser();
+ $extFilterParse = new ExtFilterParser('my_ext_filters', '/m/d/Y');
+</code></pre>]]></long-description>
+          <tag line="141" name="access" description="public"/>
+          <tag line="141" name="param" description="(Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'." type="string" variable="$requestParam">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="141" name="param" description="(Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'." type="string" variable="$dateFormat">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="153">
           <name>$requestParam</name>
           <default><![CDATA["filter"]]></default>
           <type/>
         </argument>
-        <argument line="99">
+        <argument line="153">
           <name>$dateFormat</name>
           <default><![CDATA["Y-m-d"]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="116" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="176" package="Default">
         <name>pullFiltersFromGetOrPost</name>
         <type>function</type>
-        <docblock line="110">
+        <docblock line="164">
           <description><![CDATA[Pulls filters from $_GET or $_POST]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="110" name="access" description="protected"/>
-          <tag line="110" name="return" description="" type="string">
+          <long-description><![CDATA[<p>This method is called automatically from the class constructor. If a parameter inside of $_GET or $_POST matches the requestParam value, the filters
+are automatically stored and parsed.</p>]]></long-description>
+          <tag line="164" name="access" description="protected"/>
+          <tag line="164" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$filters"/>
+          <tag line="164" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$requestParam" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::$requestParam"/>
+          <tag line="164" name="see" description="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()" refers="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse()"/>
+          <tag line="164" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="138" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="198" package="Default">
         <name>parse</name>
         <type>function</type>
-        <docblock line="131">
-          <description><![CDATA[Parses the Ext Filters and stores the results in {@link $parsedFilters}.]]></description>
+        <docblock line="191">
+          <description><![CDATA[Parses the Ext Filters]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="131" name="access" description="public"/>
-          <tag line="131" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser">
+          <tag line="191" name="access" description="public"/>
+          <tag line="191" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\ExtFilterParser">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</type>
           </tag>
-          <tag line="131" name="throws" description="If the filters being parsed are not valid" type="\UnexpectedValueException">
+          <tag line="191" name="throws" description="If the filters being parsed are not valid" type="\UnexpectedValueException">
             <type by_reference="false">\UnexpectedValueException</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="170" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="230" package="Default">
         <name>parseIntoQuery</name>
         <type>function</type>
-        <docblock line="163">
+        <docblock line="223">
           <description><![CDATA[Parses the Ext Filters and then converts them into WHERE clauses for the passed SQL Query.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="163" name="access" description="public"/>
-          <tag line="163" name="param" description="The SQL query to attach the WHERE clause to" type="string" variable="$query">
+          <tag line="223" name="access" description="public"/>
+          <tag line="223" name="param" description="The SQL query to attach the WHERE clause to" type="string" variable="$query">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="163" name="return" description="" type="string">
+          <tag line="223" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="170">
+        <argument line="230">
           <name>$query</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="196" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="256" package="Default">
         <name>decodeFilterJson</name>
         <type>function</type>
-        <docblock line="188">
-          <description><![CDATA[Validates Decodes the passed in JSON into an instance of StdClass using json_decode]]></description>
+        <docblock line="248">
+          <description><![CDATA[Validates Decodes the passed in JSON into an instance of StdClass using json_decode.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="188" name="access" description="protected"/>
-          <tag line="188" name="param" description="The JSON to be decoded" type="string" variable="$filter_json">
+          <tag line="248" name="access" description="protected"/>
+          <tag line="248" name="param" description="The JSON to be decoded" type="string" variable="$filter_json">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="188" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\StdClass">
+          <tag line="248" name="return" description="" type="\OpnSrce\Ext\ExtFilterParser\StdClass">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\StdClass</type>
           </tag>
-          <tag line="188" name="throws" description="If the passed in JSON is not valid" type="\InvalidArgumentException">
+          <tag line="248" name="throws" description="If the passed in JSON is not valid" type="\InvalidArgumentException">
             <type by_reference="false">\InvalidArgumentException</type>
           </tag>
         </docblock>
-        <argument line="196">
+        <argument line="256">
           <name>$filter_json</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="220" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="280" package="Default">
         <name>translateComparisonOperator</name>
         <type>function</type>
-        <docblock line="212">
-          <description><![CDATA[Translates Ext's custom comparison type into the standard '>', '<', and '=' symbols]]></description>
+        <docblock line="272">
+          <description><![CDATA[Translates Ext's custom comparison types into the standard '>', '<', and '=' symbols.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="212" name="access" description="protected"/>
-          <tag line="212" name="param" description="The comparison operator being translated" type="string" variable="$comparison_operator">
+          <tag line="272" name="access" description="protected"/>
+          <tag line="272" name="param" description="The comparison operator being translated" type="string" variable="$comparison_operator">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="212" name="return" description="" type="string">
+          <tag line="272" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="212" name="throws" description="If the comparison operator is not one of the expected values" type="\UnexpectedValueException">
+          <tag line="272" name="throws" description="If the comparison operator is not one of the expected values" type="\UnexpectedValueException">
             <type by_reference="false">\UnexpectedValueException</type>
           </tag>
         </docblock>
-        <argument line="220">
+        <argument line="280">
           <name>$comparison_operator</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="247" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="307" package="Default">
         <name>parseComparisonFilter</name>
         <type>function</type>
-        <docblock line="240">
-          <description><![CDATA[Parses a comparison filter]]></description>
+        <docblock line="300">
+          <description><![CDATA[Parses a comparison filter.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="240" name="access" description="protected"/>
-          <tag line="240" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
+          <tag line="300" name="access" description="protected"/>
+          <tag line="300" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\stdClass</type>
           </tag>
-          <tag line="240" name="return" description="" type="array">
+          <tag line="300" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="247">
+        <argument line="307">
           <name>$filter</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="267" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="327" package="Default">
         <name>parseDateFilter</name>
         <type>function</type>
-        <docblock line="260">
-          <description><![CDATA[Parses a Date Filter]]></description>
+        <docblock line="320">
+          <description><![CDATA[Parses a Date Filter.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="260" name="access" description="protected"/>
-          <tag line="260" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
+          <tag line="320" name="access" description="protected"/>
+          <tag line="320" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\stdClass</type>
           </tag>
-          <tag line="260" name="return" description="" type="array">
+          <tag line="320" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="267">
+        <argument line="327">
           <name>$filter</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="289" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="349" package="Default">
         <name>parseStringFilter</name>
         <type>function</type>
-        <docblock line="282">
-          <description><![CDATA[Parses a String Filter]]></description>
+        <docblock line="342">
+          <description><![CDATA[Parses a String Filter.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="282" name="access" description="protected"/>
-          <tag line="282" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
+          <tag line="342" name="access" description="protected"/>
+          <tag line="342" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\stdClass</type>
           </tag>
-          <tag line="282" name="return" description="" type="array">
+          <tag line="342" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="289">
+        <argument line="349">
           <name>$filter</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="304" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="364" package="Default">
         <name>parseListFilter</name>
         <type>function</type>
-        <docblock line="297">
-          <description><![CDATA[Parses a List Filter]]></description>
+        <docblock line="357">
+          <description><![CDATA[Parses a List Filter.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="297" name="access" description="protected"/>
-          <tag line="297" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
+          <tag line="357" name="access" description="protected"/>
+          <tag line="357" name="param" description="The filter being parsed" type="\OpnSrce\Ext\ExtFilterParser\stdClass" variable="$filter">
             <type by_reference="false">\OpnSrce\Ext\ExtFilterParser\stdClass</type>
           </tag>
-          <tag line="297" name="return" description="" type="array">
+          <tag line="357" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="304">
+        <argument line="364">
           <name>$filter</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -359,200 +388,222 @@
       </method>
     </class>
   </file>
-  <file path="\ExtFilterParserSymfony.php" hash="2eaf5707c5dae9906edab98a03cbaeb4">
+  <file path="\ExtFilterParserSymfony.php" hash="2d0a899e1b58981b53577408f4b316eb">
     <parse_markers>
-      <error line="28" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $request in __construct()</error>
-      <error line="28" code="50015">Argument $requestParam is missing from the Docblock of __construct()</error>
-      <error line="28" code="50015">Argument $dateFormat is missing from the Docblock of __construct()</error>
-      <error line="64" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $query_builder in parseIntoQuery()</error>
-      <error line="26" code="50000">No DocBlock was found for ExtFilterParserSymfony</error>
+      <error line="17" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $request in __construct()</error>
+      <error line="17" code="50014">Name of argument $request_param does not match with the DocBlock's name $requestParam in __construct()</error>
+      <notice line="17" code="50013">Parameter $requestParam could not be found in __construct()</notice>
+      <error line="56" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $queryBuilder in parseIntoQuery()</error>
       <error line="1" code="50007">No page-level DocBlock was found in file \ExtFilterParserSymfony.php</error>
     </parse_markers>
-    <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser" line="26">
+    <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser" line="15" package="Opnsrce\Ext\ExtFilterParser">
       <name>ExtFilterParserSymfony</name>
       <full_name>\OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony</full_name>
       <extends>\OpnSrce\Ext\ExtFilterParser\ExtFilterParser</extends>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="35" package="Default">
+      <docblock line="5">
+        <description><![CDATA[An Extension of the ExtFilterParser class designed to work with Symfony2.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="5" name="package" description="Opnsrce\Ext"/>
+        <tag line="5" name="subpackage" description="ExtFilterParser"/>
+        <tag line="5" name="namespace" description="\Opnsrce\Ext\ExtFilterParser"/>
+        <tag line="5" name="author" description="Levi Hackwith &lt;levi.hackwith@gmail.com&gt;"/>
+        <tag line="5" name="copyright" description="2012 Levi Hackwith"/>
+        <tag line="5" name="license" description="http://opensource.org/licenses/mit-license.php MIT License"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="26" package="Default">
         <name>__construct</name>
         <type>function</type>
-        <docblock line="28">
-          <description><![CDATA[ExtFilterParser]]></description>
+        <docblock line="17">
+          <description><![CDATA[Class constructor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="28" name="access" description="public"/>
-          <tag line="28" name="param" description="Instance of Symfony2's Request object." type="\Symfony\Component\HttpFoundation\Request" variable="$request">
+          <tag line="17" name="access" description="public"/>
+          <tag line="17" name="param" description="Instance of Symfony2's Request object." type="\Symfony\Component\HttpFoundation\Request" variable="$request">
             <type by_reference="false">\Symfony\Component\HttpFoundation\Request</type>
           </tag>
-          <tag line="28" name="link" description="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html" link="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html"/>
+          <tag line="17" name="param" description="(Optional) The parameter inside of $_GET or _POST that the filters are pulled from. Defaults to 'filter'." type="string" variable="$requestParam">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="17" name="param" description="(Optional) The format that date filters' values will be converted to. Defaults to 'Y-m-d'." type="string" variable="$dateFormat">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="17" name="link" description="Documentation for Symfony's Request object" link="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html"/>
         </docblock>
-        <argument line="35">
+        <argument line="26">
           <name>$request</name>
           <default><![CDATA[NULL]]></default>
           <type>Request</type>
         </argument>
-        <argument line="35">
-          <name>$requestParam</name>
+        <argument line="26">
+          <name>$request_param</name>
           <default><![CDATA["filter"]]></default>
           <type/>
         </argument>
-        <argument line="35">
+        <argument line="26">
           <name>$dateFormat</name>
           <default><![CDATA["Y-m-d"]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="51" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="OpnSrce\Ext\ExtFilterParser" line="43" package="Default">
         <name>pullFiltersFromGetOrPost</name>
         <type>function</type>
-        <docblock line="44">
-          <description><![CDATA[Pulls filters from $_GET or $_POST]]></description>
+        <docblock line="35">
+          <description><![CDATA[Pulls filters from $_GET or $_POST via Symfony's request object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="44" name="access" description="protected"/>
-          <tag line="44" name="param" description="Instance of Symfony2's request object." type="\Symfony\Component\HttpFoundation\Request" variable="$request">
+          <tag line="35" name="access" description="protected"/>
+          <tag line="35" name="param" description="Instance of Symfony2's request object." type="\Symfony\Component\HttpFoundation\Request" variable="$request">
             <type by_reference="false">\Symfony\Component\HttpFoundation\Request</type>
           </tag>
-          <tag line="44" name="return" description="" type="string">
+          <tag line="35" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="35" name="link" description="Documentation for Symfony's Request object" link="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html"/>
         </docblock>
-        <argument line="51">
+        <argument line="43">
           <name>$request</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="70" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser" line="64" package="Default">
         <name>parseIntoQuery</name>
         <type>function</type>
-        <docblock line="64">
+        <docblock line="56">
           <description><![CDATA[Parses the Ext Filters and then converts them into WHERE clauses for the passed in QueryBuilder object.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="64" name="link" description="http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html" link="http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html"/>
-          <tag line="64" name="param" description="Instance of Doctrine's Query Builder Object" type="\Doctrine\ORM\QueryBuilder" variable="$query_builder">
+          <tag line="56" name="access" description="public"/>
+          <tag line="56" name="param" description="Instance of Doctrine's Query Builder Object" type="\Doctrine\ORM\QueryBuilder" variable="$queryBuilder">
             <type by_reference="false">\Doctrine\ORM\QueryBuilder</type>
           </tag>
-          <tag line="64" name="return" description="Returns QueryBuilder with WHERE clauses attached." type="\Doctrine\ORM\QueryBuilder">
+          <tag line="56" name="link" description="http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html" link="http://www.doctrine-project.org/api/orm/2.0/doctrine/orm/querybuilder.html"/>
+          <tag line="56" name="return" description="Returns QueryBuilder with WHERE clauses attached." type="\Doctrine\ORM\QueryBuilder">
             <type by_reference="false">\Doctrine\ORM\QueryBuilder</type>
           </tag>
         </docblock>
-        <argument line="70">
-          <name>$query_builder</name>
+        <argument line="64">
+          <name>$queryBuilder</name>
           <default><![CDATA[]]></default>
           <type>QueryBuilder</type>
         </argument>
       </method>
     </class>
   </file>
-  <file path="\Tests\ExtFilterParserSymfonyTest.php" hash="4b3b1124208e7069a5c99e4d85506e76">
+  <file path="\Tests\ExtFilterParserSymfonyTest.php" hash="e5f6b8d2e6796f6e7cd1931ff75bba15">
     <parse_markers>
-      <error line="33" code="50018">No DocBlock was found for property $extFilterParser</error>
-      <error line="35" code="50010">No DocBlock was found for method requestMockDataProvider()</error>
-      <error line="64" code="50010">No DocBlock was found for method queryBuilderDataProvider()</error>
-      <error line="75" code="50010">No DocBlock was found for method setUp()</error>
-      <error line="79" code="50012">No short description for method generateFilterJson()</error>
-      <error line="89" code="50012">No short description for method testPullFiltersFromGetOrPost()</error>
-      <error line="89" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $request in testPullFiltersFromGetOrPost()</error>
-      <error line="104" code="50012">No short description for method testParseIntoQuery()</error>
-      <critical line="28" code="50005">No short description for class ExtFilterParserSymfonyTest</critical>
+      <error line="22" code="50018">No DocBlock was found for property $extFilterParser</error>
+      <error line="24" code="50010">No DocBlock was found for method requestMockDataProvider()</error>
+      <error line="53" code="50010">No DocBlock was found for method queryBuilderDataProvider()</error>
+      <error line="64" code="50010">No DocBlock was found for method setUp()</error>
+      <error line="68" code="50012">No short description for method generateFilterJson()</error>
+      <error line="78" code="50012">No short description for method testPullFiltersFromGetOrPost()</error>
+      <error line="78" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $request in testPullFiltersFromGetOrPost()</error>
+      <error line="93" code="50012">No short description for method testParseIntoQuery()</error>
       <error line="1" code="50007">No page-level DocBlock was found in file \Tests\ExtFilterParserSymfonyTest.php</error>
     </parse_markers>
     <namespace-alias name="ExtFilterParserSymfony">OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony</namespace-alias>
-    <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="31" package="Default">
+    <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="20" package="Opnsrce\Ext\ExtFilterParser\Tests">
       <name>ExtFilterParserSymfonyTest</name>
       <full_name>\OpnSrce\Ext\ExtFilterParser\Tests\ExtFilterParserSymfonyTest</full_name>
       <extends>\PHPUnit_Framework_TestCase</extends>
-      <docblock line="28">
-        <description><![CDATA[]]></description>
+      <docblock line="7">
+        <description><![CDATA[Unit tests for the Symfony extension of ExtFilterParser]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="28" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony"/>
+        <tag line="7" name="package" description="Opnsrce\Ext\ExtFilterParser"/>
+        <tag line="7" name="subpackage" description="Tests"/>
+        <tag line="7" name="namespace" description="\Opnsrce\Ext\ExtFilterParser\Tests"/>
+        <tag line="7" name="author" description="Levi Hackwith &lt;levi.hackwith@gmail.com&gt;"/>
+        <tag line="7" name="copyright" description="2012 Levi Hackwith"/>
+        <tag line="7" name="license" description="http://opensource.org/licenses/mit-license.php MIT License"/>
+        <tag line="7" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony"/>
       </docblock>
-      <property final="false" static="false" visibility="private" line="33">
+      <property final="false" static="false" visibility="private" line="22">
         <name>$extFilterParser</name>
         <default><![CDATA[]]></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="35">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="24">
         <name>requestMockDataProvider</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="64">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="53">
         <name>queryBuilderDataProvider</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="75">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="64">
         <name>setUp</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="85" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="74" package="Default">
         <name>generateFilterJson</name>
         <type>function</type>
-        <docblock line="79">
+        <docblock line="68">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="79" name="param" description="The filter type to generate" type="string" variable="$type">
+          <tag line="68" name="param" description="The filter type to generate" type="string" variable="$type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="79" name="param" description="The field the filter applies to" type="string" variable="$field">
+          <tag line="68" name="param" description="The field the filter applies to" type="string" variable="$field">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="79" name="param" description="The value to filter by" type="mixed" variable="$value">
+          <tag line="68" name="param" description="The value to filter by" type="mixed" variable="$value">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="79" name="param" description="(Optional) Comparison Operator" type="string" variable="$comparison">
+          <tag line="68" name="param" description="(Optional) Comparison Operator" type="string" variable="$comparison">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="85">
+        <argument line="74">
           <name>$type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="85">
+        <argument line="74">
           <name>$field</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="85">
+        <argument line="74">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="85">
+        <argument line="74">
           <name>$comparison</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="97" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="86" package="Default">
         <name>testPullFiltersFromGetOrPost</name>
         <type>function</type>
-        <docblock line="89">
+        <docblock line="78">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="89" name="dataProvider" description="requestMockDataProvider"/>
-          <tag line="89" name="param" description="Instance of the Symfony2 Request Object" type="\Symfony\Component\HttpFoundation\Request" variable="$request">
+          <tag line="78" name="dataProvider" description="requestMockDataProvider"/>
+          <tag line="78" name="param" description="Instance of the Symfony2 Request Object" type="\Symfony\Component\HttpFoundation\Request" variable="$request">
             <type by_reference="false">\Symfony\Component\HttpFoundation\Request</type>
           </tag>
-          <tag line="89" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::getParsedFilters"/>
-          <tag line="89" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::parse"/>
-          <tag line="89" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::pullFiltersFromGetOrPost"/>
+          <tag line="78" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::getParsedFilters"/>
+          <tag line="78" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::parse"/>
+          <tag line="78" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::pullFiltersFromGetOrPost"/>
         </docblock>
-        <argument line="97">
+        <argument line="86">
           <name>$request</name>
           <default><![CDATA[]]></default>
           <type>Request</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="109" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="98" package="Default">
         <name>testParseIntoQuery</name>
         <type>function</type>
-        <docblock line="104">
+        <docblock line="93">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="104" name="dataProvider" description="queryBuilderDataProvider"/>
-          <tag line="104" name="param" description="" type="\Doctrine\ORM\QueryBuilder" variable="$query_builder">
+          <tag line="93" name="dataProvider" description="queryBuilderDataProvider"/>
+          <tag line="93" name="param" description="" type="\Doctrine\ORM\QueryBuilder" variable="$query_builder">
             <type by_reference="false">\Doctrine\ORM\QueryBuilder</type>
           </tag>
         </docblock>
-        <argument line="109">
+        <argument line="98">
           <name>$query_builder</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -560,114 +611,128 @@
       </method>
     </class>
   </file>
-  <file path="\Tests\ExtFilterParserTest.php" hash="643ff8a2b13590827e70afd87d379706">
+  <file path="\Tests\ExtFilterParserTest.php" hash="822b798fd31300dc2802940f4decf314">
     <parse_markers>
-      <error line="33" code="50018">No DocBlock was found for property $extFilterParser</error>
-      <error line="35" code="50010">No DocBlock was found for method requestMockDataProvider()</error>
-      <error line="64" code="50010">No DocBlock was found for method queryBuilderDataProvider()</error>
-      <error line="75" code="50010">No DocBlock was found for method dateDataProvider()</error>
-      <error line="83" code="50010">No DocBlock was found for method setUp()</error>
-      <error line="87" code="50012">No short description for method generateFilterJson()</error>
-      <error line="97" code="50012">No short description for method testForProperties()</error>
-      <error line="108" code="50012">No short description for method testPropertyDefaultValues()</error>
-      <error line="119" code="50012">No short description for method testPropertyDataTypes()</error>
-      <error line="129" code="50012">No short description for method testParseBadJsonException()</error>
-      <error line="138" code="50012">No short description for method test__toString()</error>
-      <error line="148" code="50012">No short description for method testSetValuesFromConstructor()</error>
-      <error line="157" code="50012">No short description for method testParseUnknownComparisonOperatorException()</error>
-      <error line="166" code="50012">No short description for method testParseUnknownFilterTypeException()</error>
-      <error line="176" code="50012">No short description for method testPullFiltersFromGet()</error>
-      <error line="191" code="50012">No short description for method testPullFiltersFromPost()</error>
-      <error line="205" code="50012">No short description for method testParseUnexpectedFilterTypeException()</error>
-      <error line="215" code="50012">No short description for method testParseStringFilter()</error>
-      <error line="226" code="50012">No short description for method testParseDateFilter()</error>
-      <error line="226" code="50015">Argument $dateFormat is missing from the Docblock of testParseDateFilter()</error>
-      <error line="248" code="50012">No short description for method testParseDateFilterEmptyDate()</error>
-      <error line="264" code="50012">No short description for method testParseNumericFilterLessThan()</error>
-      <error line="279" code="50012">No short description for method testParseNumericFilterGreaterThan()</error>
-      <error line="294" code="50012">No short description for method testParseNumericFilterEqualTo()</error>
-      <error line="309" code="50012">No short description for method testParseListFilterAsArray()</error>
-      <error line="323" code="50012">No short description for method testParseListFilterAsCsv()</error>
-      <error line="343" code="50010">No DocBlock was found for method testSetFiltersReturnsInstance()</error>
-      <error line="348" code="50012">No short description for method testParseReturnsInstance()</error>
-      <error line="357" code="50012">No short description for method testParseIntoQuery()</error>
-      <error line="369" code="50012">No short description for method testGetFilters()</error>
-      <error line="379" code="50012">No short description for method testGetDateFormat()</error>
-      <critical line="28" code="50005">No short description for class ExtFilterParserTest</critical>
+      <error line="22" code="50018">No DocBlock was found for property $extFilterParser</error>
+      <error line="24" code="50010">No DocBlock was found for method requestMockDataProvider()</error>
+      <error line="53" code="50010">No DocBlock was found for method queryBuilderDataProvider()</error>
+      <error line="64" code="50010">No DocBlock was found for method dateDataProvider()</error>
+      <error line="72" code="50010">No DocBlock was found for method setUp()</error>
+      <error line="76" code="50012">No short description for method generateFilterJson()</error>
+      <error line="86" code="50012">No short description for method testForProperties()</error>
+      <error line="97" code="50012">No short description for method testPropertyDefaultValues()</error>
+      <error line="108" code="50012">No short description for method testPropertyDataTypes()</error>
+      <error line="118" code="50012">No short description for method testParseBadJsonException()</error>
+      <error line="127" code="50012">No short description for method test__toString()</error>
+      <error line="137" code="50012">No short description for method testSetValuesFromConstructor()</error>
+      <error line="146" code="50012">No short description for method testParseUnknownComparisonOperatorException()</error>
+      <error line="155" code="50012">No short description for method testParseUnknownFilterTypeException()</error>
+      <error line="165" code="50012">No short description for method testPullFiltersFromGet()</error>
+      <error line="180" code="50012">No short description for method testPullFiltersFromPost()</error>
+      <error line="194" code="50012">No short description for method testParseUnexpectedFilterTypeException()</error>
+      <error line="204" code="50012">No short description for method testParseStringFilter()</error>
+      <error line="215" code="50012">No short description for method testParseDateFilter()</error>
+      <error line="215" code="50015">Argument $dateFormat is missing from the Docblock of testParseDateFilter()</error>
+      <error line="237" code="50012">No short description for method testParseDateFilterEmptyDate()</error>
+      <error line="253" code="50012">No short description for method testParseNumericFilterLessThan()</error>
+      <error line="268" code="50012">No short description for method testParseNumericFilterGreaterThan()</error>
+      <error line="283" code="50012">No short description for method testParseNumericFilterEqualTo()</error>
+      <error line="298" code="50012">No short description for method testParseListFilterAsArray()</error>
+      <error line="312" code="50012">No short description for method testParseListFilterAsCsv()</error>
+      <error line="332" code="50010">No DocBlock was found for method testSetFiltersReturnsInstance()</error>
+      <error line="337" code="50012">No short description for method testParseReturnsInstance()</error>
+      <error line="346" code="50012">No short description for method testParseIntoQuery()</error>
+      <error line="358" code="50012">No short description for method testGetFilters()</error>
+      <error line="368" code="50012">No short description for method testGetDateFormat()</error>
       <error line="1" code="50007">No page-level DocBlock was found in file \Tests\ExtFilterParserTest.php</error>
     </parse_markers>
     <namespace-alias name="ExtFilterParser">OpnSrce\Ext\ExtFilterParser\ExtFilterParser</namespace-alias>
-    <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="31" package="Default">
+    <class final="false" abstract="false" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="20" package="Opnsrce\Ext\ExtFilterParser\Tests">
       <name>ExtFilterParserTest</name>
       <full_name>\OpnSrce\Ext\ExtFilterParser\Tests\ExtFilterParserTest</full_name>
       <extends>\PHPUnit_Framework_TestCase</extends>
-      <docblock line="28">
-        <description><![CDATA[]]></description>
+      <docblock line="7">
+        <description><![CDATA[Unit tests for ExtFilterParser]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="28" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser"/>
+        <tag line="7" name="package" description="Opnsrce\Ext\ExtFilterParser"/>
+        <tag line="7" name="subpackage" description="Tests"/>
+        <tag line="7" name="namespace" description="\Opnsrce\Ext\ExtFilterParser\Tests"/>
+        <tag line="7" name="author" description="Levi Hackwith &lt;levi.hackwith@gmail.com&gt;"/>
+        <tag line="7" name="copyright" description="2012 Levi Hackwith"/>
+        <tag line="7" name="license" description="http://opensource.org/licenses/mit-license.php MIT License"/>
+        <tag line="7" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser"/>
       </docblock>
-      <property final="false" static="false" visibility="private" line="33">
+      <property final="false" static="false" visibility="private" line="22">
         <name>$extFilterParser</name>
         <default><![CDATA[]]></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="35">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="24">
         <name>requestMockDataProvider</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="64">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="53">
         <name>queryBuilderDataProvider</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="75">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="64">
         <name>dateDataProvider</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="83">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="72">
         <name>setUp</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="93" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="82" package="Default">
         <name>generateFilterJson</name>
         <type>function</type>
-        <docblock line="87">
+        <docblock line="76">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="87" name="param" description="The filter type to generate" type="string" variable="$type">
+          <tag line="76" name="param" description="The filter type to generate" type="string" variable="$type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="87" name="param" description="The field the filter applies to" type="string" variable="$field">
+          <tag line="76" name="param" description="The field the filter applies to" type="string" variable="$field">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="87" name="param" description="The value to filter by" type="mixed" variable="$value">
+          <tag line="76" name="param" description="The value to filter by" type="mixed" variable="$value">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="87" name="param" description="(Optional) Comparison Operator" type="string" variable="$comparison">
+          <tag line="76" name="param" description="(Optional) Comparison Operator" type="string" variable="$comparison">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="93">
+        <argument line="82">
           <name>$type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="93">
+        <argument line="82">
           <name>$field</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="93">
+        <argument line="82">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="93">
+        <argument line="82">
           <name>$comparison</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="100" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="89" package="Default">
         <name>testForProperties</name>
+        <type>function</type>
+        <docblock line="86">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="86" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="100" package="Default">
+        <name>testPropertyDefaultValues</name>
         <type>function</type>
         <docblock line="97">
           <description><![CDATA[]]></description>
@@ -676,7 +741,7 @@
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="111" package="Default">
-        <name>testPropertyDefaultValues</name>
+        <name>testPropertyDataTypes</name>
         <type>function</type>
         <docblock line="108">
           <description><![CDATA[]]></description>
@@ -684,246 +749,237 @@
           <tag line="108" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="122" package="Default">
-        <name>testPropertyDataTypes</name>
-        <type>function</type>
-        <docblock line="119">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="119" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct"/>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="134" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="123" package="Default">
         <name>testParseBadJsonException</name>
         <type>function</type>
-        <docblock line="129">
+        <docblock line="118">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="129" name="expectedException" description="InvalidArgumentException"/>
-          <tag line="129" name="expectedExceptionMessage" description="ExtFilterParser::decodeFilterJson Expects first parameter to be a valid JSON string"/>
-          <tag line="129" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
+          <tag line="118" name="expectedException" description="InvalidArgumentException"/>
+          <tag line="118" name="expectedExceptionMessage" description="ExtFilterParser::decodeFilterJson Expects first parameter to be a valid JSON string"/>
+          <tag line="118" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="141" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="130" package="Default">
         <name>test__toString</name>
         <type>function</type>
-        <docblock line="138">
+        <docblock line="127">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="138" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__toString"/>
+          <tag line="127" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__toString"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="140" package="Default">
+        <name>testSetValuesFromConstructor</name>
+        <type>function</type>
+        <docblock line="137">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="137" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct"/>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="151" package="Default">
-        <name>testSetValuesFromConstructor</name>
-        <type>function</type>
-        <docblock line="148">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="148" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::__construct"/>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="162" package="Default">
         <name>testParseUnknownComparisonOperatorException</name>
         <type>function</type>
-        <docblock line="157">
+        <docblock line="146">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="157" name="expectedException" description="UnexpectedValueException"/>
-          <tag line="157" name="expectedExceptionMessage" description="ExtFilterParser::translateComparisonOperator Invalid comparison operator 'bad'"/>
-          <tag line="157" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
+          <tag line="146" name="expectedException" description="UnexpectedValueException"/>
+          <tag line="146" name="expectedExceptionMessage" description="ExtFilterParser::translateComparisonOperator Invalid comparison operator 'bad'"/>
+          <tag line="146" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="172" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="161" package="Default">
         <name>testParseUnknownFilterTypeException</name>
         <type>function</type>
-        <docblock line="166">
+        <docblock line="155">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="166" name="expectedException" description="UnexpectedValueException"/>
-          <tag line="166" name="expectedExceptionMessage" description="ExtFilterParser::parse Unknown filter type 'bad'"/>
-          <tag line="166" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
+          <tag line="155" name="expectedException" description="UnexpectedValueException"/>
+          <tag line="155" name="expectedExceptionMessage" description="ExtFilterParser::parse Unknown filter type 'bad'"/>
+          <tag line="155" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="182" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="171" package="Default">
         <name>testPullFiltersFromGet</name>
         <type>function</type>
-        <docblock line="176">
+        <docblock line="165">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="176" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="176" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="176" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost"/>
+          <tag line="165" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="165" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="165" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="197" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="186" package="Default">
         <name>testPullFiltersFromPost</name>
         <type>function</type>
-        <docblock line="191">
+        <docblock line="180">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="191" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="191" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="191" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost"/>
+          <tag line="180" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="180" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="180" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::pullFiltersFromGetOrPost"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="211" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="200" package="Default">
         <name>testParseUnexpectedFilterTypeException</name>
         <type>function</type>
-        <docblock line="205">
+        <docblock line="194">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="205" name="expectedException" description="UnexpectedValueException"/>
-          <tag line="205" name="expectedExceptionMessage" description="ExtFilterParser::parse Unknown filter type 'badValue'"/>
-          <tag line="205" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="194" name="expectedException" description="UnexpectedValueException"/>
+          <tag line="194" name="expectedExceptionMessage" description="ExtFilterParser::parse Unknown filter type 'badValue'"/>
+          <tag line="194" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="219" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="208" package="Default">
         <name>testParseStringFilter</name>
+        <type>function</type>
+        <docblock line="204">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="204" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="225" package="Default">
+        <name>testParseDateFilter</name>
         <type>function</type>
         <docblock line="215">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="215" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::decodeFilterJson"/>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="236" package="Default">
-        <name>testParseDateFilter</name>
-        <type>function</type>
-        <docblock line="226">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="226" name="dataProvider" description="dateDataProvider"/>
-          <tag line="226" name="param" description="The date to be parsed" type="string" variable="$date">
+          <tag line="215" name="dataProvider" description="dateDataProvider"/>
+          <tag line="215" name="param" description="The date to be parsed" type="string" variable="$date">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="226" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter"/>
-          <tag line="226" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="226" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="226" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
-          <tag line="226" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setDateFormat"/>
+          <tag line="215" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter"/>
+          <tag line="215" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="215" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="215" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="215" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setDateFormat"/>
         </docblock>
-        <argument line="236">
+        <argument line="225">
           <name>$date</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="236">
+        <argument line="225">
           <name>$dateFormat</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="256" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="245" package="Default">
         <name>testParseDateFilterEmptyDate</name>
         <type>function</type>
-        <docblock line="248">
+        <docblock line="237">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="248" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter"/>
-          <tag line="248" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="248" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="248" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
-          <tag line="248" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setDateFormat"/>
+          <tag line="237" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseDateFilter"/>
+          <tag line="237" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="237" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="237" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="237" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setDateFormat"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="271" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="260" package="Default">
         <name>testParseNumericFilterLessThan</name>
         <type>function</type>
-        <docblock line="264">
+        <docblock line="253">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="264" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter"/>
-          <tag line="264" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="264" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="264" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="253" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter"/>
+          <tag line="253" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="253" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="253" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="286" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="275" package="Default">
         <name>testParseNumericFilterGreaterThan</name>
         <type>function</type>
-        <docblock line="279">
+        <docblock line="268">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="279" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter"/>
-          <tag line="279" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="279" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="279" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="268" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter"/>
+          <tag line="268" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="268" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="268" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="301" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="290" package="Default">
         <name>testParseNumericFilterEqualTo</name>
         <type>function</type>
-        <docblock line="294">
+        <docblock line="283">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="294" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter"/>
-          <tag line="294" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="294" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="294" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="283" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseComparisonFilter"/>
+          <tag line="283" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="283" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="283" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="315" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="304" package="Default">
         <name>testParseListFilterAsArray</name>
         <type>function</type>
-        <docblock line="309">
+        <docblock line="298">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="309" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseListFilter"/>
-          <tag line="309" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="309" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="309" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="298" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseListFilter"/>
+          <tag line="298" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="298" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="298" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="330" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="319" package="Default">
         <name>testParseListFilterAsCsv</name>
         <type>function</type>
-        <docblock line="323">
+        <docblock line="312">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="323" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseListFilter"/>
-          <tag line="323" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
-          <tag line="323" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
-          <tag line="323" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
+          <tag line="312" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parseListFilter"/>
+          <tag line="312" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getParsedFilters"/>
+          <tag line="312" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="312" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::setFilters"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="343">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="332">
         <name>testSetFiltersReturnsInstance</name>
         <type>function</type>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="352" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="341" package="Default">
         <name>testParseReturnsInstance</name>
         <type>function</type>
-        <docblock line="348">
+        <docblock line="337">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="348" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
+          <tag line="337" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::parse"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="361" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="350" package="Default">
         <name>testParseIntoQuery</name>
         <type>function</type>
-        <docblock line="357">
+        <docblock line="346">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="357" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::parseIntoQuery"/>
+          <tag line="346" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParserSymfony::parseIntoQuery"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="373" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="362" package="Default">
         <name>testGetFilters</name>
         <type>function</type>
-        <docblock line="369">
+        <docblock line="358">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="369" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getFilters"/>
+          <tag line="358" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getFilters"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="383" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="OpnSrce\Ext\ExtFilterParser\Tests" line="372" package="Default">
         <name>testGetDateFormat</name>
         <type>function</type>
-        <docblock line="379">
+        <docblock line="368">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="379" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getDateFormat"/>
+          <tag line="368" name="covers" description="OpnSrce\Ext\ExtFilterParser\ExtFilterParser::getDateFormat"/>
         </docblock>
       </method>
     </class>
@@ -931,7 +987,9 @@
   <package name="Default"/>
   <package name="Opnsrce">
     <package name="Ext">
-      <package name="ExtFilterParser"/>
+      <package name="ExtFilterParser">
+        <package name="Tests"/>
+      </package>
     </package>
   </package>
   <package name="Search"/>
